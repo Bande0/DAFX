@@ -311,7 +311,6 @@ class SawtoothLowFrequencyOscillator:
 
 
 if __name__ == '__main__':
-    import matplotlib as mpl
     import matplotlib.pyplot as plt
 
     # LFO parameters
@@ -325,13 +324,14 @@ if __name__ == '__main__':
     waveform = 'sawtooth'  # 'sine' of 'sawtooth'
 
     # for plotting waveform
-    block_size = 128    # size of one block in samples
-    sec_per_block = 3   # no. of seconds one sample block corresponds to
+    plot_size = 128    # size of one block in samples
+    sec_per_plot = 2   # no. of seconds one sample block corresponds to
 
     # prealloc output signal buffer
-    leng = 3 * fs
+    leng = sec_per_plot * fs
     t_ax = np.r_[0: (leng-1)/fs: 1/fs]
-    y = np.zeros(leng)
+    y_sin = np.zeros(leng)
+    y_saw = np.zeros(leng)
 
     sinegen = SinusoidalLowFrequencyOscillator(bpm/60,
                                                fs,
@@ -349,8 +349,44 @@ if __name__ == '__main__':
                                                  clip_l)
 
     for i, t in enumerate(t_ax):
-        y[i] = sawtoothgen.generate()
-        # y[i] = sinegen.generate()
+        y_sin[i] = sinegen.generate()
+        y_saw[i] = sawtoothgen.generate()
 
-    plt.plot(y)
+    # from here this is only for testing the "waveform plotters"
+    # these are extra instances of the LFO's just with lower sampling rates
+    # to match the desired plot length. In the max implementation, the wrapper
+    # object will contain 2 instances of the ADSP object, and the set/get functions
+    # should handle that together with the "actual" dsp object
+
+    # prealloc plot buffer
+    pl_sin = np.zeros(plot_size)
+    pl_saw = np.zeros(plot_size)
+
+    sine_plotter = SinusoidalLowFrequencyOscillator(bpm/60,
+                                                    plot_size / sec_per_plot,
+                                                    amp,
+                                                    offset,
+                                                    clip_h,
+                                                    clip_l)
+
+    sawtooth_plotter = SawtoothLowFrequencyOscillator(bpm/60,
+                                                      plot_size / sec_per_plot,
+                                                      rise_fall_balance,
+                                                      amp,
+                                                      offset,
+                                                      clip_h,
+                                                      clip_l)
+
+    for i in range(plot_size):
+        pl_sin[i] = sine_plotter.generate()
+        pl_saw[i] = sawtooth_plotter.generate()
+
+    f1, (ax1, ax2) = plt.subplots(2, 1)
+    ax1.plot(y_sin)
+    ax2.plot(pl_sin)
+
+    f2, (ax1, ax2) = plt.subplots(2, 1)
+    ax1.plot(y_saw)
+    ax2.plot(pl_saw)
+
     plt.show()
