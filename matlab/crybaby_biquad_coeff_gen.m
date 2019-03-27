@@ -15,6 +15,7 @@ function [b0, b1, b2, a0, a1, a2] = crybaby_biquad_coeff_gen(knob_pos, crybaby_p
     Q = crybaby_param.Q;
     Gi = crybaby_param.Gi;
     gbpf = crybaby_param.gbpf;    
+    
     w0 = crybaby_param.w0;
     c = crybaby_param.c;
     s = crybaby_param.s;

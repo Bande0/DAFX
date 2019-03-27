@@ -25,7 +25,7 @@ amp = 1.3;                % waveform amplitude
 offset = 0;               % DC offset
 clip_h = 1.4;             % clip amplitude - upper
 clip_l = -0.5;            % clip amplitude - lower
-waveform = 'sawtooth';    % 'sine' of 'sawtooth'
+waveform = 'sawtooth';    % 'sine' or 'sawtooth'
 
 % at this point in time, the LFO phase is reinitialized
 lfo_reinit_phase_t = 3;
