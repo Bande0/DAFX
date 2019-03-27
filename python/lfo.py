@@ -5,30 +5,27 @@ Created on 25 Mar 2019
 '''
 import numpy as np
 
-# TODO:
-# Common ancestor class for these two with inheritance?
 
+class LowFrequencyOscillator:
+    """class LowFrequencyOscillator
 
-class SinusoidalLowFrequencyOscillator:
-    """class SinusoidalLowFrequencyOscillator
-
-    This class implements a sinusoidal oscillator by a recursive algorithm.
+    This is a base class for low frequency oscillators.
     """
 
     def __init__(self, f, fs, amp=1.0, offset=0.0, clip_h=1.0, clip_l=-1.0):
         """ Constructor
-        The method acts as a constructor for the SinusoidalLowFrequencyOscillator class.
+        The method acts as a constructor for the LowFrequencyOscillator class.
 
         Parameters
         ----------
         f : float
-            Frequency of the desired sinusoid in Hz
+            Frequency of the desired signal in Hz
         fs
             Sampling rate in Hz
         amp
-            amplitude of the sinusoid (default: 1.0)
+            amplitude of the signal (default: 1.0)
         offset
-            dc offset of the sinusioud (default: 0.0)
+            dc offset of the signal (default: 0.0)
         clip_h
             Upper clipping level (default: 1.0)
         clip_l
@@ -41,24 +38,6 @@ class SinusoidalLowFrequencyOscillator:
         self.clip_h = clip_h
         self.clip_l = clip_l
 
-        # init - freq. dependent constants
-        self._recalculate_freq_dependent_variables()
-
-        # init - inner states
-        self.u = 1.0  # cos(w)
-        self.v = 0.0  # sin(w)
-
-    def _recalculate_freq_dependent_variables(self):
-        """
-         _recalculate_freq_dependent_variables(self):
-
-        This private method recalculates internal parameters when settings are changed.
-        """
-        # reinit freq. dependent constants
-        self.w = 2.0 * np.pi * self.f / self.fs
-        self.k1 = np.tan(0.5 * self.w)
-        self.k2 = 2.0 * self.k1 / (1.0 + self.k1**2)
-
     def set_freq(self, f):
         """
         set_freq(self, f):
@@ -68,11 +47,10 @@ class SinusoidalLowFrequencyOscillator:
         Parameters
         ----------
         f : float
-            Frequency of the desired sinusoid in Hz
+            Frequency of the desired signal in Hz
         """
         # set new frequency
         self.f = f
-        self._recalculate_freq_dependent_variables
 
     def set_amp(self, amp):
         """
@@ -97,27 +75,110 @@ class SinusoidalLowFrequencyOscillator:
         Parameters
         ----------
         offset : float
-            offset of the desired sinusoid
+            offset of the desired signal
         """
         # set new offset
         self.offset = offset
 
-    def set_clip_values(self, clip_h, clip_l):
+    def set_clip_h(self, clip_h):
         """
-        set_clip_values(self, clip_h, clip_l):
+        set_clip_h(self, clip_h):
 
-        This method sets the clip values of the oscillator.
+        This method sets the upper clip value of the oscillator.
 
         Parameters
         ----------
         clip_h : float
-            Upper clip value of the desired sinusoid
-        clip_l : float
-            Lower clip value of the desired sinusoid
+            Upper clip value of the desired signal
         """
-        # set new clip_values
+        # set new clip_h value
         self.clip_h = clip_h
+
+    def set_clip_l(self, clip_l):
+        """
+        set_clip_h(self, clip_l):
+
+        This method sets the lower clip value of the oscillator.
+
+        Parameters
+        ----------
+        clip_l : float
+            Lower clip value of the desired signal
+        """
+        # set new clip_h value
         self.clip_l = clip_l
+
+    def _recalculate_private_variables(self):
+        """
+         _recalculate_private_variables(self):
+
+        This private method recalculates internal parameters when settings are changed.
+        Must be overridden by subclass!
+
+        Raises:
+        -------
+        NotImplementedError(): raised if subclass does not override this function
+        """
+        raise NotImplementedError()
+
+    def reinit_phase(self):
+        """
+        reinit_phase(self):
+
+        This method triggers re-initialization of the phase of the output signal.
+        Must be overridden by subclass!
+
+        Raises:
+        -------
+        NotImplementedError(): raised if subclass does not override this function
+        """
+        raise NotImplementedError()
+
+    def generate(self):
+        """
+        generate(self):
+
+        This method generates the next sample of the output.
+        Must be overridden by subclass!
+
+        Raises:
+        -------
+        NotImplementedError(): raised if subclass does not override this function
+        """
+        raise NotImplementedError()
+
+
+class SinusoidalLowFrequencyOscillator(LowFrequencyOscillator):
+    """class SinusoidalLowFrequencyOscillator
+
+    This class implements a sinusoidal oscillator by a recursive algorithm.
+    """
+
+    def __init__(self, f, fs, amp=1.0, offset=0.0, clip_h=1.0, clip_l=-1.0):
+        super().__init__(f, fs, amp, offset, clip_h, clip_l)
+
+        # init freq. dependent constants
+        self._recalculate_private_variables()
+
+        # init - inner states
+        self.u = 1.0  # cos(w)
+        self.v = 0.0  # sin(w)
+
+    def set_freq(self, f):
+        # set new frequency
+        super().set_freq(f)
+        self._recalculate_private_variables()
+
+    def _recalculate_private_variables(self):
+        """
+         _recalculate_private_variables(self):
+
+        This private method recalculates internal parameters when settings are changed.
+        """
+        # reinit freq. dependent constants
+        self.w = 2.0 * np.pi * self.f / self.fs
+        self.k1 = np.tan(0.5 * self.w)
+        self.k2 = 2.0 * self.k1 / (1.0 + self.k1**2)
 
     def reinit_phase(self):
         """
@@ -144,7 +205,7 @@ class SinusoidalLowFrequencyOscillator:
         return (max(min((self.amp * self.v + self.offset), self.clip_h), self.clip_l))
 
 
-class SawtoothLowFrequencyOscillator:
+class SawtoothLowFrequencyOscillator(LowFrequencyOscillator):
     """class SawtoothLowFrequencyOscillator
 
     This class implements a sawtooth waveform generator.
@@ -172,13 +233,10 @@ class SawtoothLowFrequencyOscillator:
         clip_l
             Lower clipping level (default: -1.0)
         """
-        self.fs = fs
-        self.f = f
+        super().__init__(f, fs, amp, offset, clip_h, clip_l)
         self.balance = balance
-        self.amp = amp
-        self.offset = offset
-        self.clip_h = clip_h
-        self.clip_l = clip_l
+
+        self.d_state = 'rising'  # init rise/fall state flag
 
         self._recalculate_private_variables()
 
@@ -188,7 +246,7 @@ class SawtoothLowFrequencyOscillator:
 
     def _recalculate_private_variables(self):
         """
-         _recalculate_private_variables(self):
+        _recalculate_private_variables(self):
 
         This private method recalculates internal parameters when settings are changed.
         """
@@ -202,22 +260,21 @@ class SawtoothLowFrequencyOscillator:
         self.d_rise = 2.0 * self.amp / self.t1
         self.d_fall = -2.0 * self.amp / self.t2
 
+        # update with new differential
+        if (self.d_state == 'rising'):
+            self.d = self.d_rise  # init differential
+        else:
+            self.d = self.d_fall
+
     def set_freq(self, f):
-        """
-        set_freq(self, f):
-
-        This method sets the frequency of the sawtooth wave generator.
-
-        Parameters
-        ----------
-        f : float
-            Frequency of the desired sawtooth waveform in Hz
-        """
         # set new frequency
-        self.f = f
-        self._recalculate_private_variables
+        super().set_freq(f)
+        self._recalculate_private_variables()
 
-        # TODO: IS IT NECESSARY TO RESET THE PHASE OR CAN THIS BE CONTINUOUS?
+    def set_amp(self, amp):
+        # set new amplitude
+        super().set_amp(amp)
+        self._recalculate_private_variables()
 
     def set_balance(self, balance):
         """
@@ -231,55 +288,9 @@ class SawtoothLowFrequencyOscillator:
             ratio between rise time and fall time (or upwards and downwards slope)
             of the sawtooth waveform. 0.5 corresponds to equal rise and fall
         """
-        # set new frequency
-        self.balance = balance
-        self._recalculate_private_variables
-
-    def set_amp(self, amp):
-        """
-        set_amp(self, amp):
-
-        This method sets the amplitude of the sawtooth wave generator.
-
-        Parameters
-        ----------
-        amp : float
-            Amplitude of the sawtooth wave generator.
-        """
-        # set new frequency
-        self.amp = amp
-        self._recalculate_private_variables
-
-    def set_offset(self, offset):
-        """
-        set_offset(self, offset):
-
-        This method sets the offset of the oscillator.
-
-        Parameters
-        ----------
-        offset : float
-            offset of the desired sinusoid
-        """
-        # set new offset
-        self.offset = offset
-
-    def set_clip_values(self, clip_h, clip_l):
-        """
-        set_clip_values(self, clip_h, clip_l):
-
-        This method sets the clip values of the oscillator.
-
-        Parameters
-        ----------
-        clip_h : float
-            Upper clip value of the desired sinusoid
-        clip_l : float
-            Lower clip value of the desired sinusoid
-        """
-        # set new clip_values
-        self.clip_h = clip_h
-        self.clip_l = clip_l
+        # set new balance
+        self.balance = max(min(balance, 0.99), 0.01)
+        self._recalculate_private_variables()
 
     def reinit_phase(self):
         """
@@ -290,6 +301,7 @@ class SawtoothLowFrequencyOscillator:
         # reinit inner states
         self.y = 0.0    # output sample
         self.d = self.d_rise  # init differential
+        self.d_state = 'rising'
 
     def generate(self):
         """
@@ -300,8 +312,10 @@ class SawtoothLowFrequencyOscillator:
         # recursive modified sawtooth waveform generation
         if (self.y >= self.amp):
             self.d = self.d_fall
+            self.d_state = 'falling'
         elif (self.y <= -self.amp):
             self.d = self.d_rise
+            self.d_state = 'rising'
 
         # update new sample with differential
         self.y = self.y + self.d
@@ -315,13 +329,12 @@ if __name__ == '__main__':
 
     # LFO parameters
     fs = 48000     # sampling freq
-    bpm = 60       # LFO frequency (BPM)
-    rise_fall_balance = 0.8  # rise / fal balance (between 0 and 1)
+    bpm = 110       # LFO frequency (BPM)
+    rise_fall_balance = 0.99  # rise / fal balance (between 0 and 1)
     amp = 1.3        # waveform amplitude
     offset = 0.4   # DC offset
     clip_h = 1.4   # clip amplitude - upper
     clip_l = -0.5   # clip amplitude - lower
-    waveform = 'sawtooth'  # 'sine' of 'sawtooth'
 
     # for plotting waveform
     plot_size = 128    # size of one block in samples
@@ -388,5 +401,42 @@ if __name__ == '__main__':
     f2, (ax1, ax2) = plt.subplots(2, 1)
     ax1.plot(y_saw)
     ax2.plot(pl_saw)
+
+    # prealloc output signal buffer
+    leng = 10 * fs
+    t_ax = np.r_[0: (leng-1)/fs: 1/fs]
+    y_long = np.zeros(leng)
+
+    i = 0
+    sawtoothgen.set_clip_h(4.5)
+    sawtoothgen.set_clip_l(-4.5)
+    while(i < (0.3*leng)):
+        y_long[i] = sawtoothgen.generate()
+        sawtoothgen.set_freq(bpm/60)
+        bpm += 0.002
+        sawtoothgen.set_balance(rise_fall_balance)
+        rise_fall_balance -= 1.0 / (0.3*leng)
+        i += 1
+
+    while(i < (0.5*leng)):
+        y_long[i] = sawtoothgen.generate()
+        sawtoothgen.set_freq(bpm/60)
+        bpm -= 0.0035
+        i += 1
+
+    while(i < (0.7*leng)):
+        y_long[i] = sawtoothgen.generate()
+        sawtoothgen.set_offset(offset)
+        offset -= 0.000025
+        i += 1
+
+    while(i < leng):
+        y_long[i] = sawtoothgen.generate()
+        sawtoothgen.set_amp(amp)
+        amp += 0.000075
+        i += 1
+
+    f3, ax1 = plt.subplots(1, 1)
+    ax1.plot(y_long)
 
     plt.show()
