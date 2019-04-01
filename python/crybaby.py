@@ -5,6 +5,7 @@ Created on 27 Mar 2019
 '''
 import numpy as np
 from crybaby_params import crybaby_params as param
+from biquad import BiquadFilter
 
 
 class CryBaby:
@@ -49,7 +50,7 @@ class CryBaby:
         self.w0 = 2.0 * np.pi * self.f0 / self.fs
         self.c = np.cos(self.w0)
         self.s = np.sin(self.w0)
-        self.alpha = self.s/(2.0 * self.Q)
+        self.alpha = self.s / (2.0 * self.Q)
 
         # init knob value
         self.gp = 0
@@ -72,7 +73,7 @@ class CryBaby:
 
         # Numerator coefficients
         self.b0 = self.gbpf * self.b0b + self.Gi * self.a0b
-        self.b1 =                        self.Gi * self.a1b
+        self.b1 = self.Gi * self.a1b
         self.b2 = self.gbpf * self.b2b + self.Gi * self.a2b
 
         # Constants to make denominator coefficients computation more efficient
@@ -88,17 +89,19 @@ class CryBaby:
         self.a2 = (self.a2b + self.gp * self.a2c) * ax
         self.a0 = 1.0
 
-#          % TODO: 1-Pole HPF coeffs
-#          % make this part of the signal chain either as a different module or
-#          % by including in the [b, a] calculations
+        # instantiate biquad filter (this will be the variable wah-filter)
+        self.biquad = BiquadFilter(self.b0, self.b1, self.b2, self.a0, self.a1, self.a2)
+
+#        # 1st order HPF coeffs
+#        self.a1p = np.exp(-1.0 / (self.Ri * self.Ci * fs))
+#        self.g = self.gf * (1.0 + self.a1p) * 0.5  # put the forward gain into the HPF
 #
-#              a1p = exp(-1/(Ri*Ci*fs));
-#              g = gf*(1.0 + a1p)*0.5;  %put the forward gain into the HPF to avoid repeated
-#              multiplications in real-time
+#        # Transfer function of 1-Pole HPF
+#        # Hin = g * (1 - z1)./(1 - a1p.*z1)
 #
-#              %Transfer functions
-#              %1-Pole HPF
-#              Hin = g * (1 - z1)./(1 - a1p.*z1);
+#        # implement the 1st order HPF through a biquad, where the 2nd order coefficients
+#        # are set to zero. Not optimal, but I'm lazy now.
+#        self.hp1 = BiquadFilter(self.g, -self.g, 0.0, 1.0, self.a1p, 0.0)
 
     def generate_coeffs(self, pedal_pos):
         """ generate_coeffs(self, pedal_pos):
@@ -152,21 +155,21 @@ if __name__ == '__main__':
     from dafx_audio_io import read_audio, write_audio
 
     # file I/O
-    infile_name = 'clean_funky_lick_90bpm'   # 'clean_pop_strum_100bpm' 'clean_funky_lick_90bpm'
+    infile_name = 'whitenoise_5s'  # 'whitenoise'  'clean_funky_lick_90bpm' 'clean_pop_strum_100bpm'
     outfile_name = infile_name + '_crybaby'
 
     # user defined params
-    wah_balance = 0.75      # balance between wah'ed and direct signal
+    wah_balance = 0.75  # balance between wah'ed and direct signal
     lfo_reinit_phase_s = 3  # at this point in time, the LFO phase is reinitialized
 
     # LFO parameters
-    bpm = 90                  # LFO frequency (BPM)
-    rise_fall_balance = 0.8   # rise / fal balance (between 0 and 1)
-    amp = 1.3                 # waveform amplitude
-    offset = 0.0              # DC offset
-    clip_h = 1.4              # clip amplitude - upper
-    clip_l = -0.5             # clip amplitude - lower
-    waveform = 'sawtooth'     # 'sine' of 'sawtooth'
+    bpm = 90  # LFO frequency (BPM)
+    rise_fall_balance = 0.8  # rise / fal balance (between 0 and 1)
+    amp = 1.3  # waveform amplitude
+    offset = 0.0  # DC offset
+    clip_h = 1.4  # clip amplitude - upper
+    clip_l = -0.5  # clip amplitude - lower
+    waveform = 'sawtooth'  # 'sine' of 'sawtooth'
 
     # read in wav file
     infile_path = '../../input_audio/' + infile_name + '.wav'
@@ -174,7 +177,7 @@ if __name__ == '__main__':
     leng = x.__len__()
 
     # time axis
-    t_ax = np.r_[0: leng/fs: 1/fs]
+    t_ax = np.r_[0: leng / fs: 1 / fs]
 
     # prealloc signal buffers
     lfo_out = np.zeros(t_ax.__len__())
@@ -187,14 +190,14 @@ if __name__ == '__main__':
 
     # objects instantiation
     if (waveform == 'sine'):
-        lfo = SinusoidalLowFrequencyOscillator(bpm/60,
+        lfo = SinusoidalLowFrequencyOscillator(bpm / 60,
                                                fs,
                                                amp,
                                                offset,
                                                clip_h,
                                                clip_l)
     elif (waveform == 'sawtooth'):
-        lfo = SawtoothLowFrequencyOscillator(bpm/60,
+        lfo = SawtoothLowFrequencyOscillator(bpm / 60,
                                              fs,
                                              rise_fall_balance,
                                              amp,
@@ -224,22 +227,21 @@ if __name__ == '__main__':
         # CALCULATE CRYBABY COEFFS
         [b0, b1, b2, a0, a1, a2] = crybaby.generate_coeffs(pedal_pos[n])
 
-        # 2ND ORDER IIR
-        # only for the first 2 samples, so we don't index into negative x
-        if (n == 0):
-            bp_out[n] = b0 * x[n]
-        elif (n == 1):
-            bp_out[n] = b0 * x[n] + b1 * x[n-1] - a1 * bp_out[n-1]
-        else:
-            # biquad direct form
-            bp_out[n] = b0 * x[n] + b1 * x[n-1] + b2 * x[n-2] - a1 * bp_out[n-1] - a2 * bp_out[n-2]
+        # update coeffs in biquad filter
+        crybaby.biquad.set_coeffs(b0, b1, b2, a0, a1, a2)
+
+        # filtering operation
+        bp_out[n] = crybaby.biquad.process_td2(x[n])
 
         # TODO: 1ST ORDER HP FILTER HERE!!!
 
         # mixing the filtered signal with the direct signal for final output
         crybaby_out[n] = wah_balance * bp_out[n] + (1.0 - wah_balance) * x[n]
 
-    plt.plot(lfo_out)
+    f1, (ax1, ax2) = plt.subplots(2, 1)
+    ax1.plot(lfo_out)
+    ax2.plot(crybaby_out)
+
     plt.show()
 
     outfile_path = '../../output_audio/crybaby/' + outfile_name + '.wav'
