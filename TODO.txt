@@ -1,0 +1,19 @@
+Dafx
+
+- [x] Biquad Python objekt
+- 1st order filter Python objekt
+- Integrator (with DC removal filter)
+- Delay line (fixed)
+- Delay line (variable, integer sample)
+- Delay line (variable, fractional)
+- Tremolo (AM)
+- Vibrato (doppler-delay)
+- Vibrato with “rise time” on depth!
+- Crossover!
+- Leslie (strymon lex and Ventilator II controls, slow and high speed, rampup time /different for horn and woofer/, woofer and horn blend, stereo spread + direct-to-reverb ratio /mic distance/ ) + overdrive
+- Multiband leslie??
+- 1x vibrato + direct = flanger
+- Nx random vibrato + direct = chorus 
+- Generalized parallel comb filters for reverb
+
+Interface expression pedal with max?
