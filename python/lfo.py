@@ -112,7 +112,8 @@ class LowFrequencyOscillator:
         """
          _recalculate_private_variables(self):
 
-        This private method recalculates internal parameters when settings are changed.
+        This private method recalculates internal parameters
+        when settings are changed.
         Must be overridden by subclass!
 
         Raises:
@@ -173,7 +174,8 @@ class SinusoidalLowFrequencyOscillator(LowFrequencyOscillator):
         """
          _recalculate_private_variables(self):
 
-        This private method recalculates internal parameters when settings are changed.
+        This private method recalculates internal parameters
+        when settings are changed.
         """
         # reinit freq. dependent constants
         self.w = 2.0 * np.pi * self.f / self.fs
@@ -213,7 +215,8 @@ class SawtoothLowFrequencyOscillator(LowFrequencyOscillator):
 
     def __init__(self, f, fs, balance=0.5, amp=1.0, offset=0.0, clip_h=1.0, clip_l=-1.0):
         """ Constructor
-        The method acts as a constructor for the SawtoothLowFrequencyOscillator class.
+        The method acts as a constructor for
+        the SawtoothLowFrequencyOscillator class.
 
         Parameters
         ----------
@@ -248,7 +251,8 @@ class SawtoothLowFrequencyOscillator(LowFrequencyOscillator):
         """
         _recalculate_private_variables(self):
 
-        This private method recalculates internal parameters when settings are changed.
+        This private method recalculates internal parameters
+        when settings are changed.
         """
         # calculate internal constants
         # duration of a full period in samples (rounded to the nearest sample)
@@ -280,7 +284,8 @@ class SawtoothLowFrequencyOscillator(LowFrequencyOscillator):
         """
         set_balance(self, balance):
 
-        This method sets the balance between rise and fall periods of the sawtooth wave generator.
+        This method sets the balance between rise and fall periods
+        of the sawtooth wave generator.
 
         Parameters
         ----------
@@ -327,18 +332,22 @@ class SawtoothLowFrequencyOscillator(LowFrequencyOscillator):
 if __name__ == '__main__':
     import matplotlib.pyplot as plt
 
+    # %% ---  Step 1. - Setting up and running LFO objects ---
+    # We are setting up both a Sinusoidal and a Sawtooth-type
+    # LFO object with the same parameters. We are running them for 2 seconds.
+
+    # sampling rate
+    fs = 48000
+    # duration of testrun in seconds
+    sec_per_plot = 2
+
     # LFO parameters
-    fs = 48000     # sampling freq
     bpm = 110       # LFO frequency (BPM)
-    rise_fall_balance = 0.99  # rise / fal balance (between 0 and 1)
+    rise_fall_balance = 0.9  # rise / fal balance (between 0 and 1) for sawtooth LFO
     amp = 1.3        # waveform amplitude
     offset = 0.4   # DC offset
     clip_h = 1.4   # clip amplitude - upper
     clip_l = -0.5   # clip amplitude - lower
-
-    # for plotting waveform
-    plot_size = 128    # size of one block in samples
-    sec_per_plot = 2   # no. of seconds one sample block corresponds to
 
     # prealloc output signal buffer
     leng = sec_per_plot * fs
@@ -365,34 +374,47 @@ if __name__ == '__main__':
         y_sin[i] = sinegen.generate()
         y_saw[i] = sawtoothgen.generate()
 
-    # from here this is only for testing the "waveform plotters"
+    # %% ---  Step 2. - Setting up and running waveform plotters ---
     # these are extra instances of the LFO's just with lower sampling rates
     # to match the desired plot length. In the max implementation, the wrapper
     # object will contain 2 instances of the ADSP object, and the set/get functions
     # should handle that together with the "actual" dsp object
 
+    # OBS:
+    # The sawtooth plotter often plots bullshit due to numeric errors in
+    # calculating the slope of "undersampled" signals - this especially shows
+    # up when then chosen plot length is short and the sawtooth balance is
+    # well away from 50%. I have decided not to care, as this is "just a plotter"
+
+    # for plotting waveform
+    plot_size_in_samples = 256    # size of one block in samples
+    # reduced sampling rate for plotters:
+    fs_plotter = plot_size_in_samples / sec_per_plot
+
     # prealloc plot buffer
-    pl_sin = np.zeros(plot_size)
-    pl_saw = np.zeros(plot_size)
+    pl_sin = np.zeros(plot_size_in_samples)
+    pl_saw = np.zeros(plot_size_in_samples)
 
     sine_plotter = SinusoidalLowFrequencyOscillator(bpm/60,
-                                                    plot_size / sec_per_plot,
+                                                    fs_plotter,
                                                     amp,
                                                     offset,
                                                     clip_h,
                                                     clip_l)
 
     sawtooth_plotter = SawtoothLowFrequencyOscillator(bpm/60,
-                                                      plot_size / sec_per_plot,
+                                                      fs_plotter,
                                                       rise_fall_balance,
                                                       amp,
                                                       offset,
                                                       clip_h,
                                                       clip_l)
 
-    for i in range(plot_size):
+    for i in range(plot_size_in_samples):
         pl_sin[i] = sine_plotter.generate()
         pl_saw[i] = sawtooth_plotter.generate()
+
+    # %% ---  Step 3. - Plotting LFO and Waveform plotter outputs ---
 
     f1, (ax1, ax2) = plt.subplots(2, 1)
     ax1.plot(y_sin)
@@ -402,14 +424,21 @@ if __name__ == '__main__':
     ax1.plot(y_saw)
     ax2.plot(pl_saw)
 
+    # %% ---  Step 4. - Testing an LFO with changing parameters on the go ---
+
+    # Don't run this block of code on its own several times, you'll see bullshit
+    # values - this block depends on the LFO object's setup previously
+
     # prealloc output signal buffer
-    leng = 10 * fs
+    leng = 10 * fs  # let's run it for 10 seconds
     t_ax = np.r_[0: (leng-1)/fs: 1/fs]
     y_long = np.zeros(leng)
 
     i = 0
     sawtoothgen.set_clip_h(4.5)
     sawtoothgen.set_clip_l(-4.5)
+
+    # increase frequency and tilt balance backwards
     while(i < (0.3*leng)):
         y_long[i] = sawtoothgen.generate()
         sawtoothgen.set_freq(bpm/60)
@@ -418,18 +447,21 @@ if __name__ == '__main__':
         rise_fall_balance -= 1.0 / (0.3*leng)
         i += 1
 
+    # decrease frequency
     while(i < (0.5*leng)):
         y_long[i] = sawtoothgen.generate()
         sawtoothgen.set_freq(bpm/60)
         bpm -= 0.0035
         i += 1
 
+    # decrease DC
     while(i < (0.7*leng)):
         y_long[i] = sawtoothgen.generate()
         sawtoothgen.set_offset(offset)
         offset -= 0.000025
         i += 1
 
+    # increase amplitude
     while(i < leng):
         y_long[i] = sawtoothgen.generate()
         sawtoothgen.set_amp(amp)

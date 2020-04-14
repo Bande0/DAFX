@@ -15,7 +15,8 @@ class CryBaby:
     The analog circuitry of a Dunlop Crybaby pedal is modelled and the time-varying
     filter transfer function inferred.
 
-    The only adjustable parameters are the sampling frequency, pedal position and the mix balance
+    The only adjustable parameters are the sampling frequency,
+    expression pedal position and the mix balance
     between bandpassed and direct signals
     """
 
@@ -30,6 +31,7 @@ class CryBaby:
         """
         self.fs = fs
 
+        # pre-defined parameters from crybaby_param
         self.gf = param['gf']
         self.Cf = param['Cf']
         self.Ci = param['Ci']
@@ -154,6 +156,11 @@ if __name__ == '__main__':
     from lfo import SinusoidalLowFrequencyOscillator, SawtoothLowFrequencyOscillator
     from dafx_audio_io import read_audio, write_audio
 
+    # %% -- Demonstrating Crybaby wah-wah effect by performing auto-wah
+    # A clean input file is read, onto which the effect is applied.
+    # The expression pedal position in this demo is controlled by a DAFX LFO object
+    # (which corresponds to an auto-wah)
+
     # file I/O
     infile_name = 'whitenoise_5s'  # 'whitenoise'  'clean_funky_lick_90bpm' 'clean_pop_strum_100bpm'
     outfile_name = infile_name + '_crybaby'
@@ -188,7 +195,7 @@ if __name__ == '__main__':
     # sample index where the LFO phase is reinitialized
     lfo_reinit_phase_idx = np.round(lfo_reinit_phase_s * fs)
 
-    # objects instantiation
+    # Instantiate LFO
     if (waveform == 'sine'):
         lfo = SinusoidalLowFrequencyOscillator(bpm / 60,
                                                fs,
@@ -205,12 +212,13 @@ if __name__ == '__main__':
                                              clip_h,
                                              clip_l)
 
+    # Instantiate Crybaby
     crybaby = CryBaby(fs)
 
-    # MAIN LOOP
+    # %% MAIN LOOP
     for n in range(leng):
 
-        # trigger a phase reinit in the LFO
+        # trigger a phase reinit in the LFO at the appropriate spot
         if (n == lfo_reinit_phase_idx):
             lfo.reinit_phase()
 
@@ -233,16 +241,17 @@ if __name__ == '__main__':
         # filtering operation
         bp_out[n] = crybaby.biquad.process_td2(x[n])
 
-        # TODO: 1ST ORDER HP FILTER HERE!!!
+        # TODO: 1ST ORDER HP FILTER HERE!
 
         # mixing the filtered signal with the direct signal for final output
         crybaby_out[n] = wah_balance * bp_out[n] + (1.0 - wah_balance) * x[n]
 
+    outfile_path = '../../output_audio/crybaby/' + outfile_name + '.wav'
+    write_audio(crybaby_out, fs, outfile_path)
+
+    # %%
     f1, (ax1, ax2) = plt.subplots(2, 1)
     ax1.plot(lfo_out)
     ax2.plot(crybaby_out)
 
     plt.show()
-
-    outfile_path = '../../output_audio/crybaby/' + outfile_name + '.wav'
-    write_audio(crybaby_out, fs, outfile_path)
