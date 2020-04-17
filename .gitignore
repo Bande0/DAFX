@@ -1,2 +1,7 @@
 python/.settings
 python/__pycache__
+build
+Build
+project.xcworkspace
+xcuserdata
+DerivedData

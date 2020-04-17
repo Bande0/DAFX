@@ -1,0 +1,23 @@
+// Xcode target configuration settings for the Max 6 SDK
+// Used as the basis for Xcode projects to build Max externals.
+//
+// Changes to the settings in this file will be applied to all SDK examples
+// To change settings for only one of the examples, override the settings using
+// Xcode's target inspector.
+//
+// by Timothy Place
+// Copyright © 2012, Cycling '74
+
+#include "maxmspsdk_common.xcconfig"
+// Name & Version
+PRODUCT_NAME = $(PROJECT_NAME)
+
+// Paths
+HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/../../../C/includes" "$(SRCROOT)/../../../C/inits" "$(C74SUPPORT)/max-includes" "$(C74SUPPORT)/msp-includes"
+USE_HEADERMAP = $(inherited)
+
+// environment variables
+CURRENT_PROJECT_DIR = "$(PROJECT_DIR)"
+
+// Preprocessor Defines
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) "BUILD_EXTERNAL_FOR_ARM = 0" CURRENT_PROJECT_DIR_MACRO='$(CURRENT_PROJECT_DIR)'

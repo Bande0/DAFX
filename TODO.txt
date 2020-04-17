@@ -8,7 +8,7 @@ Dafx TODO
 
 - Delay line (variable, fractional)
 - Implement mkbiquad as a python object?
-- Overdrive module
+- Overdrive - oversampling to reduce aliasing effects? Pre- and postfilters?
 - Tremolo (AM)
 - 1st order filter Python objekt
 - Integrator (with DC removal filter)
