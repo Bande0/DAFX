@@ -56,21 +56,21 @@ bool DAFXOverdrive(t_DAFXOverdrive *pOD)
         float x = in_gain * pInput[i];
         
         // tanh
-        //pOutput[i] = out_gain * tanh(tan_param * x);
+        pOutput[i] = out_gain * tanh(tan_param * x);
         
         //sin
-        if (x > thresh)
-        {
-            pOutput[i] = out_gain;
-        }
-        else if (x < -1.0*thresh)
-        {
-            pOutput[i] = -1.0 * out_gain;
-        }
-        else
-        {
-            pOutput[i] = out_gain * sinf(saturation * ONE_PI * x);
-        }
+    //    if (x > thresh)
+    //    {
+    //        pOutput[i] = out_gain;
+    //    }
+    //    else if (x < -1.0*thresh)
+    //    {
+    //        pOutput[i] = -1.0 * out_gain;
+    //    }
+    //    else
+    //    {
+    //        pOutput[i] = out_gain * sinf(saturation * ONE_PI * x);
+    //    }
     }
     
     return true;
@@ -106,21 +106,21 @@ bool ReDrawGainCurve(t_DAFXOverdrive *pOD)
         //TODO: CALL THE CURRENT OVERDRIVE PROCESS FUNCTION HERE
         
         //tanh
-        //pOD->p_gain_curve[i] = pOD->out_gain * tanh(pOD->tan_param * x);
+        pOD->p_gain_curve[i] = pOD->out_gain * tanh(pOD->tan_param * x);
         
         //sin
-        if (x > thresh)
-        {
-            pOD->p_gain_curve[i] = out_gain;
-        }
-        else if (x < -1.0*thresh)
-        {
-            pOD->p_gain_curve[i] = -1.0 * out_gain;
-        }
-        else
-        {
-            pOD->p_gain_curve[i] = out_gain * sinf(saturation * ONE_PI * x);
-        }
+ //       if (x > thresh)
+ //       {
+ //           pOD->p_gain_curve[i] = out_gain;
+ //       }
+ //       else if (x < -1.0*thresh)
+ //       {
+ //           pOD->p_gain_curve[i] = -1.0 * out_gain;
+ //       }
+ //       else
+ //       {
+ //           pOD->p_gain_curve[i] = out_gain * sinf(saturation * ONE_PI * x);
+ //       }
                
         x += increment;
     }

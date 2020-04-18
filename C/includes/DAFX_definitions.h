@@ -16,7 +16,7 @@ extern "C" {
 #define     FS_24k   24000
 #define     FS_16k   16000
     
-#define     DAFX_BLOCK_SIZE  256
+#define     DAFX_BLOCK_SIZE  64
 
 // Math constant
 #define     TWO_PI      6.283185307179586
