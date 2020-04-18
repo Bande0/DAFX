@@ -42,7 +42,7 @@
 
 /* Begin PBXFileReference section */
 		22CF119A0EE9A8250054F513 /* Overdrive~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "Overdrive~.c"; sourceTree = "<group>"; };
-		2FBBEAE508F335360078DB84 /* Overdrive~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Overdrive~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2FBBEAE508F335360078DB84 /* DAFXOverdrive~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DAFXOverdrive~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4962F5191D37BF810069786A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = ../../../../../../../../../System/Library/Frameworks/Accelerate.framework; sourceTree = "<group>"; };
 		4976B6DE2176093800D9D863 /* DRC_arm_unittest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DRC_arm_unittest; sourceTree = BUILT_PRODUCTS_DIR; };
 		49D8D9681F7D3B5900DA5B7C /* DRC_unittest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DRC_unittest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,7 +137,7 @@
 		19C28FB4FE9D528D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2FBBEAE508F335360078DB84 /* Overdrive~.mxo */,
+				2FBBEAE508F335360078DB84 /* DAFXOverdrive~.mxo */,
 				49D8D9681F7D3B5900DA5B7C /* DRC_unittest */,
 				4976B6DE2176093800D9D863 /* DRC_arm_unittest */,
 			);
@@ -185,7 +185,7 @@
 			);
 			name = "max-external";
 			productName = iterator;
-			productReference = 2FBBEAE508F335360078DB84 /* Overdrive~.mxo */;
+			productReference = 2FBBEAE508F335360078DB84 /* DAFXOverdrive~.mxo */;
 			productType = "com.apple.product-type.bundle";
 		};
 		4976B6DD2176093800D9D863 /* DRC_arm_unittest */ = {
@@ -238,7 +238,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "Overdrive~" */;
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "DAFXOverdrive~" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 1;
@@ -332,7 +332,7 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = "Overdrive~";
+				PRODUCT_NAME = "DAFXOverdrive~";
 				SDKROOT = macosx;
 			};
 			name = Development;
@@ -343,7 +343,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
-				PRODUCT_NAME = "Overdrive~";
+				PRODUCT_NAME = "DAFXOverdrive~";
 				SDKROOT = macosx;
 			};
 			name = Deployment;
@@ -525,7 +525,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "Overdrive~" */ = {
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "DAFXOverdrive~" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2FBBEAD008F335010078DB84 /* Development */,

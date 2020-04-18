@@ -10,11 +10,13 @@
 extern "C" {
 #endif
     
+
+#define     FS_48k   48000
+#define     FS_44_1k 44100
+#define     FS_24k   24000
+#define     FS_16k   16000
     
-#define     FS_44k 44100
-#define     FS_24k 24000
-#define     FS_16k 16000
-    
+#define     DAFX_BLOCK_SIZE  256
 
 // Math constant
 #define     TWO_PI      6.283185307179586
