@@ -22,12 +22,12 @@ extern "C" {
 #define OD_INIT_THRESH_MIN             0.01
 #define OD_INIT_THRESH_MAX             1.0
 #define OD_INIT_TAN_MIN                3.0
-#define OD_INIT_TAN_MAX                100.0
+#define OD_INIT_TAN_MAX                150.0
 #define OD_INIT_EXP_MIN                2.0
 #define OD_INIT_EXP_MAX                10.0
 #define OD_INIT_IN_GAIN_MIN            0.0
 #define OD_INIT_IN_GAIN_MAX            10.0
-#define OD_INIT_OUT_GAIN_MIN           0.5
+#define OD_INIT_OUT_GAIN_MIN           0.01
 #define OD_INIT_OUT_GAIN_MAX           0.99   
     
   
