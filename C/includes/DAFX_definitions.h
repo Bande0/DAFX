@@ -16,7 +16,7 @@ extern "C" {
 #define     FS_24k   24000
 #define     FS_16k   16000
     
-#define     DAFX_BLOCK_SIZE     64
+#define     DAFX_BLOCK_SIZE     16
 #define     DAFX_SAMPLE_RATE    FS_48k
     
 
