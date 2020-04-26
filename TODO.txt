@@ -5,11 +5,15 @@ Dafx TODO
 - [x] Delay line (variable, integer sample)
 - [x] Vibrato (doppler-delay)
 - [x] 1x vibrato + direct = flanger
+- [x] Tremolo (AM)
 
+Tremolo:
+	- sinewave-to-squarewave parameter in tremolo (whaaaaaat)
+	- pre-gain (for same perceived volume)
+- WTF is a buffer/preamp
 - Delay line (variable, fractional)
 - Implement mkbiquad as a python object?
 - Overdrive - oversampling to reduce aliasing effects? Pre- and postfilters?
-- Tremolo (AM)
 - 1st order filter Python objekt
 - Integrator (with DC removal filter)
 - Vibrato with “rise time” on depth!
