@@ -117,14 +117,6 @@ extern "C" {
     bool _RecalculatePrivateVariables(t_DAFXLowFrequencyOscillator *pLFO);
     
     /*!
-     * @brief Triggers reinitialization of the phase
-     *
-     * @param pointer on LowFrequencyOscillator structure
-     * @return process status
-     */
-    bool _ReinitPhase(t_DAFXLowFrequencyOscillator *pLFO);
-    
-    /*!
      * @brief Sample Generation function for Sinusoidal LFO
      *
      * @param pointer on LowFrequencyOscillator structure
@@ -139,6 +131,70 @@ extern "C" {
      * @return process status
      */
     float _GenerateSawtoothLFO(t_DAFXLowFrequencyOscillator *pLFO);
+    
+    /*!
+     * @brief Triggers reinitialization of the phase
+     *
+     * @param pointer on LowFrequencyOscillator structure
+     * @return process status
+     */
+    bool ReinitPhase(t_DAFXLowFrequencyOscillator *pLFO);
+    
+    /*!
+     * @brief sets the LFO sample generation method
+     *
+     * @param pointer on LowFrequencyOscillator structure
+     * @return process status
+     */
+    bool SetMode(t_DAFXLowFrequencyOscillator *pLFO, t_lfo_algo_select algo);
+    
+    /*!
+     * @brief sets the frequency of the oscillator
+     *
+     * @param pointer on LowFrequencyOscillator structure
+     * @return process status
+     */
+    bool SetFrequency(t_DAFXLowFrequencyOscillator *pLFO, float f);
+    
+    /*!
+     * @brief sets the amplitude of the oscillator
+     *
+     * @param pointer on LowFrequencyOscillator structure
+     * @return process status
+     */
+    bool SetAmplitude(t_DAFXLowFrequencyOscillator *pLFO, float a);
+    
+    /*!
+     * @brief sets the balance of the oscillator (sawtooth only)
+     *
+     * @param pointer on LowFrequencyOscillator structure
+     * @return process status
+     */
+    bool SetBalance(t_DAFXLowFrequencyOscillator *pLFO, float bal);
+    
+    /*!
+     * @brief sets the offset of the oscillator
+     *
+     * @param pointer on LowFrequencyOscillator structure
+     * @return process status
+     */
+    bool SetOffset(t_DAFXLowFrequencyOscillator *pLFO, float off);
+    
+    /*!
+     * @brief sets the upper clipping level of the oscillator
+     *
+     * @param pointer on LowFrequencyOscillator structure
+     * @return process status
+     */
+    bool SetClipHigh(t_DAFXLowFrequencyOscillator *pLFO, float clip_h);
+    
+    /*!
+     * @brief sets the lower clipping level of the oscillator
+     *
+     * @param pointer on LowFrequencyOscillator structure
+     * @return process status
+     */
+    bool SetClipLow(t_DAFXLowFrequencyOscillator *pLFO, float clip_l);    
     
     
 #ifdef __cplusplus

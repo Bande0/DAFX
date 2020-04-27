@@ -144,8 +144,7 @@
 			}
 , 			{
 				"box" : 				{
-					"bufsize" : 256,
-					"calccount" : 151,
+					"calccount" : 128,
 					"id" : "obj-49",
 					"maxclass" : "scope~",
 					"numinlets" : 2,
@@ -445,7 +444,7 @@
 					"patching_rect" : [ 131.0, 127.0, 18.0, 42.0 ],
 					"size" : 2,
 					"style" : "",
-					"value" : 1
+					"value" : 0
 				}
 
 			}
@@ -459,7 +458,7 @@
 					"patching_rect" : [ 696.0, 38.0, 100.0, 40.0 ],
 					"preset_data" : [ 						{
 							"number" : 1,
-							"data" : [ 5, "obj-5", "radiogroup", "int", 0, 5, "obj-2", "flonum", "float", 5.0, 5, "obj-3", "flonum", "float", 1.0, 5, "obj-6", "flonum", "float", 0.0, 5, "obj-7", "flonum", "float", 1.0, 5, "obj-10", "flonum", "float", 0.5, 5, "obj-19", "flonum", "float", -1.0, 5, "obj-26", "toggle", "int", 0, 5, "obj-42", "number", "int", 0, 5, "obj-25", "number", "int", 0 ]
+							"data" : [ 5, "obj-5", "radiogroup", "int", 0, 5, "obj-2", "flonum", "float", 5.0, 5, "obj-3", "flonum", "float", 1.02, 5, "obj-6", "flonum", "float", 0.0, 5, "obj-7", "flonum", "float", 1.0, 5, "obj-10", "flonum", "float", 0.5, 5, "obj-19", "flonum", "float", -1.0, 5, "obj-26", "toggle", "int", 0, 5, "obj-42", "number", "int", 128, 5, "obj-25", "number", "int", 128 ]
 						}
  ],
 					"style" : ""
@@ -654,8 +653,8 @@
 , 			{
 				"name" : "helpfile_label-1",
 				"default" : 				{
-					"fontname" : [ "Arial" ],
 					"textcolor" : [ 0.501961, 0.501961, 0.501961, 1.0 ],
+					"fontname" : [ "Arial" ],
 					"fontsize" : [ 13.0 ]
 				}
 ,

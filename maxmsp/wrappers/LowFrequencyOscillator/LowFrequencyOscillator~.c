@@ -147,7 +147,7 @@ void LowFrequencyOscillator_bang(t_LowFrequencyOscillator *x)
             
         //Trigger phase reinit
         case LFO_INLET_REINIT_PHASE:
-            _ReinitPhase(x->pLFO);
+            ReinitPhase(x->pLFO);
             break;
         default:
             break;
@@ -165,53 +165,37 @@ void LowFrequencyOscillator_float(t_LowFrequencyOscillator *x, double f)
     {
         //LowFrequencyOscillator algo selector
         case LFO_INLET_ALGO_SELECT:
-            {
-                switch((int)f) {
-                    case LFO_ALGO_SELECT_SIN:
-                        x->pLFO->algo = LFO_ALGO_SELECT_SIN;
-                        x->pLFO->pf_process_func = &_GenerateSinusoidalLFO;
-                        break;
-                    case LFO_ALGO_SELECT_SAW:
-                        x->pLFO->algo = LFO_ALGO_SELECT_SAW;
-                        x->pLFO->pf_process_func = &_GenerateSawtoothLFO;
-                        break;
-                    default:
-                        break;
-                }
-            }
+            SetMode(x->pLFO, (t_lfo_algo_select) f);
             break;
             
         //Frequency
         case LFO_INLET_F:
-            x->pLFO->f = DAFX_MAX(f, 0.0);
-            _RecalculatePrivateVariables(x->pLFO);
+            SetFrequency(x->pLFO, f);
             break;
         
         //Amplitude
         case LFO_INLET_AMP:
-            x->pLFO->f = DAFX_MAX(f, 0.0);
-            _RecalculatePrivateVariables(x->pLFO);
+            SetAmplitude(x->pLFO, f);
             break;
             
         //Balance
         case LFO_INLET_BALANCE:
-            x->pLFO->balance = DAFX_MAX(DAFX_MIN(f, LFO_MAX_BALANCE), LFO_MIN_BALANCE);
-            _RecalculatePrivateVariables(x->pLFO);
+            SetBalance(x->pLFO, f);
             break;
             
         //Offset
         case LFO_INLET_OFFSET:
-            x->pLFO->offset = f;
+            SetOffset(x->pLFO, f);
             break;
             
         //Clip H
         case LFO_INLET_CLIP_H:
-            x->pLFO->clip_h = f;
+            SetClipHigh(x->pLFO, f);
             break;
             
         //Clip L
         case LFO_INLET_CLIP_L:
-            x->pLFO->clip_l = f;
+            SetClipLow(x->pLFO, f);
             break;
             
         //Set the LFO_perform to Bypass / process

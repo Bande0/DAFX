@@ -8,6 +8,83 @@
 #include "DAFX_definitions.h"
 #include <Accelerate/Accelerate.h>
 
+bool SetMode(t_DAFXLowFrequencyOscillator *pLFO, t_lfo_algo_select alg)
+{
+    switch(alg) {
+        case LFO_ALGO_SELECT_SIN:
+            pLFO->algo = LFO_ALGO_SELECT_SIN;
+            pLFO->pf_process_func = &_GenerateSinusoidalLFO;
+            break;
+        case LFO_ALGO_SELECT_SAW:
+            pLFO->algo = LFO_ALGO_SELECT_SAW;
+            pLFO->pf_process_func = &_GenerateSawtoothLFO;
+            break;
+        default:
+            break;
+    }
+
+    return true;
+}
+
+bool SetFrequency(t_DAFXLowFrequencyOscillator *pLFO, float f)
+{
+    pLFO->f = DAFX_MAX(f, 0.0);
+    _RecalculatePrivateVariables(pLFO);
+    
+    return true;
+}
+
+bool SetAmplitude(t_DAFXLowFrequencyOscillator *pLFO, float a)
+{
+    pLFO->amp = DAFX_MAX(a, 0.0);
+    _RecalculatePrivateVariables(pLFO);
+    
+    return true;
+}
+
+bool SetBalance(t_DAFXLowFrequencyOscillator *pLFO, float bal)
+{
+    pLFO->balance = DAFX_MAX(DAFX_MIN(bal, LFO_MAX_BALANCE), LFO_MIN_BALANCE);
+    _RecalculatePrivateVariables(pLFO);
+    
+    return true;
+}
+
+bool SetOffset(t_DAFXLowFrequencyOscillator *pLFO, float off)
+{
+    pLFO->offset = off;
+    return true;
+}
+
+bool SetClipHigh(t_DAFXLowFrequencyOscillator *pLFO, float clip_h)
+{
+    pLFO->clip_h = clip_h;
+    return true;
+}
+
+bool SetClipLow(t_DAFXLowFrequencyOscillator *pLFO, float clip_l)
+{
+    pLFO->clip_l = clip_l;
+    return true;
+}
+
+
+bool ReinitPhase(t_DAFXLowFrequencyOscillator *pLFO)
+{
+    if(pLFO->algo == LFO_ALGO_SELECT_SIN)
+    {
+        pLFO->u = 1.0;
+        pLFO->v = 0.0;
+    }
+    else
+    {
+        pLFO->y = 0.0;
+        pLFO->d = pLFO->d_rise;
+        pLFO->d_state = LFO_STATE_RISING;
+    }
+    return true;
+}
+
 bool _RecalculatePrivateVariables(t_DAFXLowFrequencyOscillator *pLFO)
 {
     //For now, this re-calculates both the sine and sawtooth parameters, regardless of current mode
@@ -37,22 +114,6 @@ bool _RecalculatePrivateVariables(t_DAFXLowFrequencyOscillator *pLFO)
         pLFO->d = pLFO->d_fall;
     }
     
-    return true;
-}
-
-bool _ReinitPhase(t_DAFXLowFrequencyOscillator *pLFO)
-{
-    if(pLFO->algo == LFO_ALGO_SELECT_SIN)
-    {
-        pLFO->u = 1.0;
-        pLFO->v = 0.0;
-    }
-    else
-    {
-        pLFO->y = 0.0;
-        pLFO->d = pLFO->d_rise;
-        pLFO->d_state = LFO_STATE_RISING;
-    }    
     return true;
 }
 
