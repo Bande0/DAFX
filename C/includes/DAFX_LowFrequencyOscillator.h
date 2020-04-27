@@ -68,7 +68,7 @@ extern "C" {
         t_lfo_state d_state;
         
         //function pointer to sample generation function
-        void * pf_process_func;
+        void *pf_process_func;
         
     }t_DAFXLowFrequencyOscillator;
     

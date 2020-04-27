@@ -1,0 +1,579 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		22CF119B0EE9A8250054F513 /* Tremolo~.c in Sources */ = {isa = PBXBuildFile; fileRef = 22CF119A0EE9A8250054F513 /* Tremolo~.c */; };
+		4931550C245782610032FC4C /* DAFX_Tremolo.h in Headers */ = {isa = PBXBuildFile; fileRef = 4931550B245782610032FC4C /* DAFX_Tremolo.h */; };
+		4931550E245782670032FC4C /* DAFX_InitTremolo.h in Headers */ = {isa = PBXBuildFile; fileRef = 4931550D245782670032FC4C /* DAFX_InitTremolo.h */; };
+		493155102457826E0032FC4C /* DAFX_Tremolo.c in Sources */ = {isa = PBXBuildFile; fileRef = 4931550F2457826E0032FC4C /* DAFX_Tremolo.c */; };
+		49315512245786080032FC4C /* DAFX_LowFrequencyOscillator.c in Sources */ = {isa = PBXBuildFile; fileRef = 49315511245786080032FC4C /* DAFX_LowFrequencyOscillator.c */; };
+		49315514245786120032FC4C /* DAFX_InitLowFrequencyOscillator.h in Headers */ = {isa = PBXBuildFile; fileRef = 49315513245786120032FC4C /* DAFX_InitLowFrequencyOscillator.h */; };
+		49315516245786180032FC4C /* DAFX_LowFrequencyOscillator.h in Headers */ = {isa = PBXBuildFile; fileRef = 49315515245786180032FC4C /* DAFX_LowFrequencyOscillator.h */; };
+		4962F51A1D37BF810069786A /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4962F5191D37BF810069786A /* Accelerate.framework */; };
+		49D8D9781F7D3DCA00DA5B7C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49D8D9771F7D3DCA00DA5B7C /* Accelerate.framework */; };
+		49EC662A244A5D470059AF07 /* maxmspsdk_common.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 49EC6628244A5D470059AF07 /* maxmspsdk_common.xcconfig */; };
+		49EC662B244A5D470059AF07 /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 49EC6629244A5D470059AF07 /* maxmspsdk.xcconfig */; };
+		49EC663D244A65FF0059AF07 /* Tremolo.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EC663C244A65FF0059AF07 /* Tremolo.h */; };
+		49EC6649244A688E0059AF07 /* DAFX_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EC6648244A688E0059AF07 /* DAFX_definitions.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4976B6DC2176093800D9D863 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		49D8D9661F7D3B5900DA5B7C /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		22CF119A0EE9A8250054F513 /* Tremolo~.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = "Tremolo~.c"; sourceTree = "<group>"; };
+		2FBBEAE508F335360078DB84 /* DAFXTremolo~.mxo */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "DAFXTremolo~.mxo"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4931550B245782610032FC4C /* DAFX_Tremolo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAFX_Tremolo.h; path = ../../../C/includes/DAFX_Tremolo.h; sourceTree = "<group>"; };
+		4931550D245782670032FC4C /* DAFX_InitTremolo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAFX_InitTremolo.h; path = ../../../C/inits/DAFX_InitTremolo.h; sourceTree = "<group>"; };
+		4931550F2457826E0032FC4C /* DAFX_Tremolo.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = DAFX_Tremolo.c; path = ../../../C/src/DAFX_Tremolo.c; sourceTree = "<group>"; };
+		49315511245786080032FC4C /* DAFX_LowFrequencyOscillator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = DAFX_LowFrequencyOscillator.c; path = ../../../C/src/DAFX_LowFrequencyOscillator.c; sourceTree = "<group>"; };
+		49315513245786120032FC4C /* DAFX_InitLowFrequencyOscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAFX_InitLowFrequencyOscillator.h; path = ../../../C/inits/DAFX_InitLowFrequencyOscillator.h; sourceTree = "<group>"; };
+		49315515245786180032FC4C /* DAFX_LowFrequencyOscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAFX_LowFrequencyOscillator.h; path = ../../../C/includes/DAFX_LowFrequencyOscillator.h; sourceTree = "<group>"; };
+		4962F5191D37BF810069786A /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = ../../../../../../../../../System/Library/Frameworks/Accelerate.framework; sourceTree = "<group>"; };
+		4976B6DE2176093800D9D863 /* DRC_arm_unittest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DRC_arm_unittest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49D8D9681F7D3B5900DA5B7C /* DRC_unittest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = DRC_unittest; sourceTree = BUILT_PRODUCTS_DIR; };
+		49D8D9771F7D3DCA00DA5B7C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		49EC6628244A5D470059AF07 /* maxmspsdk_common.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk_common.xcconfig; path = ../../config/maxmspsdk_common.xcconfig; sourceTree = "<group>"; };
+		49EC6629244A5D470059AF07 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../../config/maxmspsdk.xcconfig; sourceTree = "<group>"; };
+		49EC663C244A65FF0059AF07 /* Tremolo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tremolo.h; sourceTree = "<group>"; };
+		49EC6648244A688E0059AF07 /* DAFX_definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAFX_definitions.h; path = ../../../C/includes/DAFX_definitions.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2FBBEADC08F335360078DB84 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4962F51A1D37BF810069786A /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4976B6DB2176093800D9D863 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49D8D9651F7D3B5900DA5B7C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49D8D9781F7D3DCA00DA5B7C /* Accelerate.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0239F3B71E659F2B0033B321 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				49EC6628244A5D470059AF07 /* maxmspsdk_common.xcconfig */,
+				49EC6629244A5D470059AF07 /* maxmspsdk.xcconfig */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		0268EEB61D8824120018B806 /* dsp */ = {
+			isa = PBXGroup;
+			children = (
+				494189051D89308800BB5713 /* inits */,
+				0268EEB71D8824120018B806 /* includes */,
+				0268EEC61D8824120018B806 /* src */,
+			);
+			name = dsp;
+			path = ../../dsp;
+			sourceTree = "<group>";
+		};
+		0268EEB71D8824120018B806 /* includes */ = {
+			isa = PBXGroup;
+			children = (
+				4931550D245782670032FC4C /* DAFX_InitTremolo.h */,
+				49315513245786120032FC4C /* DAFX_InitLowFrequencyOscillator.h */,
+				4931550B245782610032FC4C /* DAFX_Tremolo.h */,
+				49315515245786180032FC4C /* DAFX_LowFrequencyOscillator.h */,
+			);
+			path = includes;
+			sourceTree = "<group>";
+		};
+		0268EEC61D8824120018B806 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				49315511245786080032FC4C /* DAFX_LowFrequencyOscillator.c */,
+				4931550F2457826E0032FC4C /* DAFX_Tremolo.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		089C166AFE841209C02AAC07 /* iterator */ = {
+			isa = PBXGroup;
+			children = (
+				49D8D9771F7D3DCA00DA5B7C /* Accelerate.framework */,
+				0239F3B71E659F2B0033B321 /* Config */,
+				49EC663C244A65FF0059AF07 /* Tremolo.h */,
+				49EC6648244A688E0059AF07 /* DAFX_definitions.h */,
+				0268EEB61D8824120018B806 /* dsp */,
+				22CF119A0EE9A8250054F513 /* Tremolo~.c */,
+				4962F5191D37BF810069786A /* Accelerate.framework */,
+				19C28FB4FE9D528D11CA2CBB /* Products */,
+			);
+			name = iterator;
+			sourceTree = "<group>";
+		};
+		19C28FB4FE9D528D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2FBBEAE508F335360078DB84 /* DAFXTremolo~.mxo */,
+				49D8D9681F7D3B5900DA5B7C /* DRC_unittest */,
+				4976B6DE2176093800D9D863 /* DRC_arm_unittest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		494189051D89308800BB5713 /* inits */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = inits;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		2FBBEAD708F335360078DB84 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49315514245786120032FC4C /* DAFX_InitLowFrequencyOscillator.h in Headers */,
+				4931550E245782670032FC4C /* DAFX_InitTremolo.h in Headers */,
+				49EC663D244A65FF0059AF07 /* Tremolo.h in Headers */,
+				49EC6649244A688E0059AF07 /* DAFX_definitions.h in Headers */,
+				4931550C245782610032FC4C /* DAFX_Tremolo.h in Headers */,
+				49315516245786180032FC4C /* DAFX_LowFrequencyOscillator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		2FBBEAD608F335360078DB84 /* max-external */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */;
+			buildPhases = (
+				2FBBEAD708F335360078DB84 /* Headers */,
+				2FBBEAD808F335360078DB84 /* Resources */,
+				2FBBEADA08F335360078DB84 /* Sources */,
+				2FBBEADC08F335360078DB84 /* Frameworks */,
+				2FBBEADF08F335360078DB84 /* Rez */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "max-external";
+			productName = iterator;
+			productReference = 2FBBEAE508F335360078DB84 /* DAFXTremolo~.mxo */;
+			productType = "com.apple.product-type.bundle";
+		};
+		4976B6DD2176093800D9D863 /* DRC_arm_unittest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4976B6E22176093800D9D863 /* Build configuration list for PBXNativeTarget "DRC_arm_unittest" */;
+			buildPhases = (
+				4976B6DA2176093800D9D863 /* Sources */,
+				4976B6DB2176093800D9D863 /* Frameworks */,
+				4976B6DC2176093800D9D863 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DRC_arm_unittest;
+			productName = DRC_arm_unittest;
+			productReference = 4976B6DE2176093800D9D863 /* DRC_arm_unittest */;
+			productType = "com.apple.product-type.tool";
+		};
+		49D8D9671F7D3B5900DA5B7C /* DRC_unittest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49D8D96E1F7D3B5900DA5B7C /* Build configuration list for PBXNativeTarget "DRC_unittest" */;
+			buildPhases = (
+				49D8D9641F7D3B5900DA5B7C /* Sources */,
+				49D8D9651F7D3B5900DA5B7C /* Frameworks */,
+				49D8D9661F7D3B5900DA5B7C /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DRC_unittest;
+			productName = DRC_unittest;
+			productReference = 49D8D9681F7D3B5900DA5B7C /* DRC_unittest */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		089C1669FE841209C02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				TargetAttributes = {
+					4976B6DD2176093800D9D863 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+					49D8D9671F7D3B5900DA5B7C = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "DAFXTremolo~" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 089C166AFE841209C02AAC07 /* iterator */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2FBBEAD608F335360078DB84 /* max-external */,
+				49D8D9671F7D3B5900DA5B7C /* DRC_unittest */,
+				4976B6DD2176093800D9D863 /* DRC_arm_unittest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2FBBEAD808F335360078DB84 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49EC662A244A5D470059AF07 /* maxmspsdk_common.xcconfig in Resources */,
+				49EC662B244A5D470059AF07 /* maxmspsdk.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXRezBuildPhase section */
+		2FBBEADF08F335360078DB84 /* Rez */ = {
+			isa = PBXRezBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXRezBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2FBBEADA08F335360078DB84 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				22CF119B0EE9A8250054F513 /* Tremolo~.c in Sources */,
+				493155102457826E0032FC4C /* DAFX_Tremolo.c in Sources */,
+				49315512245786080032FC4C /* DAFX_LowFrequencyOscillator.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4976B6DA2176093800D9D863 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49D8D9641F7D3B5900DA5B7C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2FBBEAD008F335010078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(inherited)";
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = "$(inherited)";
+			};
+			name = Development;
+		};
+		2FBBEAD108F335010078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(inherited)";
+				SDKROOT = "$(inherited)";
+			};
+			name = Deployment;
+		};
+		2FBBEAE108F335360078DB84 /* Development */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49EC6629244A5D470059AF07 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = "DAFXTremolo~";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		2FBBEAE208F335360078DB84 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49EC6629244A5D470059AF07 /* maxmspsdk.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				COPY_PHASE_STRIP = YES;
+				PRODUCT_NAME = "DAFXTremolo~";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		4976B6E32176093800D9D863 /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Development;
+		};
+		4976B6E42176093800D9D863 /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Deployment;
+		};
+		49D8D96C1F7D3B5900DA5B7C /* Development */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "$(inherited)";
+			};
+			name = Development;
+		};
+		49D8D96D1F7D3B5900DA5B7C /* Deployment */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "$(inherited)";
+			};
+			name = Deployment;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2FBBEACF08F335010078DB84 /* Build configuration list for PBXProject "DAFXTremolo~" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAD008F335010078DB84 /* Development */,
+				2FBBEAD108F335010078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		2FBBEAE008F335360078DB84 /* Build configuration list for PBXNativeTarget "max-external" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2FBBEAE108F335360078DB84 /* Development */,
+				2FBBEAE208F335360078DB84 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		4976B6E22176093800D9D863 /* Build configuration list for PBXNativeTarget "DRC_arm_unittest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4976B6E32176093800D9D863 /* Development */,
+				4976B6E42176093800D9D863 /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+		49D8D96E1F7D3B5900DA5B7C /* Build configuration list for PBXNativeTarget "DRC_unittest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49D8D96C1F7D3B5900DA5B7C /* Development */,
+				49D8D96D1F7D3B5900DA5B7C /* Deployment */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Development;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 089C1669FE841209C02AAC07 /* Project object */;
+}
