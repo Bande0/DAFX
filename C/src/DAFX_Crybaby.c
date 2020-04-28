@@ -7,6 +7,7 @@
 #include "DAFX_InitCrybaby.h"
 #include "DAFX_BiquadFilter.h"
 #include "DAFX_InitBiquadFilter.h"
+#include "DAFX_LowFrequencyOscillator.h"
 #include "DAFX_definitions.h"
 #include <Accelerate/Accelerate.h>
 
@@ -21,6 +22,19 @@ bool InitDAFXCrybaby(t_DAFXCrybaby *pCB)
     pCB->p_output_block = (float *) calloc(block_size, sizeof(float));
     pCB->p_biquad_coeffs = (float *) calloc(BIQUAD_DENOMINATOR_SIZE + BIQUAD_NUMERATOR_SIZE, sizeof(float));
     pCB->p_biquad = (t_DAFX_BiquadFilter *) calloc(1, sizeof(t_DAFX_BiquadFilter));
+    
+    //allocate and init LFO
+    pCB->pLFO = (t_DAFXLowFrequencyOscillator *) calloc(1, sizeof(t_DAFXLowFrequencyOscillator));
+    pCB->pLFO->fs = pCB->fs;
+    pCB->pLFO->block_size = block_size;
+    InitDAFXLowFrequencyOscillator(pCB->pLFO);
+    SetMode(pCB->pLFO, CB_INIT_LFO_MODE);
+    SetFrequency(pCB->pLFO, CB_INIT_LFO_FREQ_HZ);
+    SetAmplitude(pCB->pLFO, CB_INIT_LFO_AMP);
+    SetOffset(pCB->pLFO, CB_INIT_LFO_OFFSET);
+    SetClipHigh(pCB->pLFO, CB_INIT_LFO_CLIP_H);
+    SetClipLow(pCB->pLFO, CB_INIT_LFO_CLIP_L);
+    SetBalance(pCB->pLFO, CB_INIT_LFO_BALANCE);
    
     //Useful params
     float w0 = 2.0 * ONE_PI * CB_INIT_F0 / (float)fs;
@@ -138,6 +152,35 @@ bool DAFXProcessCrybaby(t_DAFXCrybaby *pCB)
     for (int i = 0; i < pCB->block_size; i++) {
         p_output_block[i] = balance * p_bq_outbuf[i] + inv_balance * p_input_block[i];
     }    
+    
+    return true;
+}
+
+bool DAFXProcessAutoCrybaby(t_DAFXCrybaby *pCB)
+{
+    float *p_input_block = pCB->p_input_block;
+    float *p_output_block = pCB->p_output_block;
+    float balance = pCB->wah_balance;
+    float inv_balance = 1.0 - pCB->wah_balance;
+    float *p_lfo_buff = pCB->pLFO->p_output_block;
+    
+    float pedal_pos, out;
+    
+    //First, generate the LFO signal with a single call to its sample generator function
+    DAFXLowFrequencyOscillator(pCB->pLFO);
+    
+    //Loop through the input buffers (signal buff and LFO control buff are of same length)
+    // --> update pedal position, re-generate coeffs, process filter
+    for (int i = 0; i < pCB->block_size; i++)
+    {
+        pedal_pos = DAFX_MAX(DAFX_MIN(p_lfo_buff[i], CB_PEDAL_MAX), CB_PEDAL_MIN);
+        pedal_pos = 1.0 - pedal_pos;
+        
+        UpdatePedalPos(pCB, pedal_pos);
+        out = ProcessSingleSampleBiquad(pCB->p_biquad, p_input_block[i]);
+        
+        p_output_block[i] = balance * out + inv_balance * p_input_block[i];
+    }
     
     return true;
 }

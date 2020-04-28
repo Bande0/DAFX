@@ -118,6 +118,8 @@ void Tremolo_assist(t_Tremolo *x, void *b, long m, long a, char *s)
             case TREM_OUTLET_LFO_SIGNAL:
                 sprintf(s, "(signal) LFO signal");
                 break;
+            case TREM_OUTLET_LFO_OFFSET:
+                sprintf(s, "(signal) LFO offset");
             default:
                 sprintf(s, "Invalid outlet!");
                 break;
@@ -206,6 +208,7 @@ void Tremolo_perform64(t_Tremolo *x,
     t_double *InSignal = ins[TREM_INLET_INPUT_SIGNAL];
     t_double *OutSignal = outs[TREM_OUTLET_OUTPUT_SIGNAL];	// we get audio for each outlet of the object from the **outs argument
     t_double *LFOSignal = outs[TREM_OUTLET_LFO_SIGNAL];	// we get audio for each outlet of the object from the **outs argument
+    t_double *LFOOffset = outs[TREM_OUTLET_LFO_OFFSET];	// we get audio for each outlet of the object from the **outs argument
     
     //Converting the incoming signal from double to float complex in a temporary array
     for (int i = 0; i < sampleframes; i++) {
@@ -220,6 +223,7 @@ void Tremolo_perform64(t_Tremolo *x,
         //Converting results from float back to double, which Max expects
         OutSignal[i] = (double) pTREM->p_output_block[i];
         LFOSignal[i] = (double) pTREM->p_LFO->p_output_block[i];
+        LFOOffset[i] = (double) pTREM->p_LFO->offset;
     }
     
 }

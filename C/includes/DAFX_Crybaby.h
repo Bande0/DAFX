@@ -16,10 +16,19 @@
 #include <Accelerate/Accelerate.h>
 
 #include "DAFX_BiquadFilter.h"
+#include "DAFX_LowFrequencyOscillator.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
+    
+    typedef enum
+    {
+        CB_BYPASS_CRYBABY = 0,
+        CB_MANUAL_CRYBABY,
+        CB_AUTO_CRYBABY,
+        Crybaby_N_ALGOS,
+    }t_cb_algo_select;
     
     typedef struct{
         
@@ -31,6 +40,7 @@ extern "C" {
         float *p_biquad_coeffs;
         
         t_DAFX_BiquadFilter *p_biquad;
+        t_DAFXLowFrequencyOscillator *pLFO;
         
         float wah_balance;
         
@@ -79,6 +89,14 @@ extern "C" {
      * @return process status
      */
     bool DAFXProcessCrybaby(t_DAFXCrybaby *pCB);
+    
+    /*!
+     * @brief Process and Apply Auto-Crybaby to incoming signal
+     *
+     * @param pointer on Crybaby structure
+     * @return process status
+     */
+    bool DAFXProcessAutoCrybaby(t_DAFXCrybaby *pCB);
     
     /*!
      * @brief Bypass Crybaby of incoming signal

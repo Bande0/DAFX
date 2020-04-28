@@ -20,6 +20,9 @@
 		49EC662B244A5D470059AF07 /* maxmspsdk.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 49EC6629244A5D470059AF07 /* maxmspsdk.xcconfig */; };
 		49EC663D244A65FF0059AF07 /* Crybaby.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EC663C244A65FF0059AF07 /* Crybaby.h */; };
 		49EC6649244A688E0059AF07 /* DAFX_definitions.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EC6648244A688E0059AF07 /* DAFX_definitions.h */; };
+		49EC88572458816400CF7164 /* DAFX_LowFrequencyOscillator.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EC88562458816400CF7164 /* DAFX_LowFrequencyOscillator.h */; };
+		49EC88592458816B00CF7164 /* DAFX_InitLowFrequencyOscillator.h in Headers */ = {isa = PBXBuildFile; fileRef = 49EC88582458816B00CF7164 /* DAFX_InitLowFrequencyOscillator.h */; };
+		49EC885B2458817200CF7164 /* DAFX_LowFrequencyOscillator.c in Sources */ = {isa = PBXBuildFile; fileRef = 49EC885A2458817200CF7164 /* DAFX_LowFrequencyOscillator.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +63,9 @@
 		49EC6629244A5D470059AF07 /* maxmspsdk.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = maxmspsdk.xcconfig; path = ../../config/maxmspsdk.xcconfig; sourceTree = "<group>"; };
 		49EC663C244A65FF0059AF07 /* Crybaby.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crybaby.h; sourceTree = "<group>"; };
 		49EC6648244A688E0059AF07 /* DAFX_definitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAFX_definitions.h; path = ../../../C/includes/DAFX_definitions.h; sourceTree = "<group>"; };
+		49EC88562458816400CF7164 /* DAFX_LowFrequencyOscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAFX_LowFrequencyOscillator.h; path = ../../../C/includes/DAFX_LowFrequencyOscillator.h; sourceTree = "<group>"; };
+		49EC88582458816B00CF7164 /* DAFX_InitLowFrequencyOscillator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DAFX_InitLowFrequencyOscillator.h; path = ../../../C/inits/DAFX_InitLowFrequencyOscillator.h; sourceTree = "<group>"; };
+		49EC885A2458817200CF7164 /* DAFX_LowFrequencyOscillator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = DAFX_LowFrequencyOscillator.c; path = ../../../C/src/DAFX_LowFrequencyOscillator.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +118,8 @@
 		0268EEB71D8824120018B806 /* includes */ = {
 			isa = PBXGroup;
 			children = (
+				49EC88562458816400CF7164 /* DAFX_LowFrequencyOscillator.h */,
+				49EC88582458816B00CF7164 /* DAFX_InitLowFrequencyOscillator.h */,
 				49A734E3244BC12A00D31E3F /* DAFX_InitBiquadFilter.h */,
 				49A734DF244BBB4A00D31E3F /* DAFX_InitCrybaby.h */,
 				49A734E1244BC0C300D31E3F /* DAFX_BiquadFilter.h */,
@@ -123,6 +131,7 @@
 		0268EEC61D8824120018B806 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				49EC885A2458817200CF7164 /* DAFX_LowFrequencyOscillator.c */,
 				49A734E5244BC1F400D31E3F /* DAFX_BiquadFilter.c */,
 				49A734DD244BBB0400D31E3F /* DAFX_Crybaby.c */,
 			);
@@ -170,10 +179,12 @@
 			files = (
 				49A734E0244BBB4A00D31E3F /* DAFX_InitCrybaby.h in Headers */,
 				49EC663D244A65FF0059AF07 /* Crybaby.h in Headers */,
+				49EC88572458816400CF7164 /* DAFX_LowFrequencyOscillator.h in Headers */,
 				49A734E2244BC0C300D31E3F /* DAFX_BiquadFilter.h in Headers */,
 				49A734E4244BC12A00D31E3F /* DAFX_InitBiquadFilter.h in Headers */,
 				49A734DA244BBAF500D31E3F /* DAFX_Crybaby.h in Headers */,
 				49EC6649244A688E0059AF07 /* DAFX_definitions.h in Headers */,
+				49EC88592458816B00CF7164 /* DAFX_InitLowFrequencyOscillator.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49EC885B2458817200CF7164 /* DAFX_LowFrequencyOscillator.c in Sources */,
 				22CF119B0EE9A8250054F513 /* Crybaby~.c in Sources */,
 				49A734DE244BBB0400D31E3F /* DAFX_Crybaby.c in Sources */,
 				49A734E6244BC1F400D31E3F /* DAFX_BiquadFilter.c in Sources */,

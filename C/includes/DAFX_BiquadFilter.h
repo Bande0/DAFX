@@ -65,6 +65,9 @@ extern "C" {
      */
     bool ProcessBiquad(t_DAFX_BiquadFilter *pBQF);
     
+    /* same as above, but sample-based*/
+    float ProcessSingleSampleBiquad(t_DAFX_BiquadFilter *pBQF, float x);
+    
     /*!
      * Set biquad coefficients
      *

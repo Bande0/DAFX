@@ -33,6 +33,7 @@ enum
 {
     TREM_OUTLET_OUTPUT_SIGNAL = 0,
     TREM_OUTLET_LFO_SIGNAL,
+    TREM_OUTLET_LFO_OFFSET,
     Tremolo_N_OUTLETS,
 };
     

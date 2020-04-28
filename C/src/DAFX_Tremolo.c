@@ -31,11 +31,6 @@ bool SetDepth(t_DAFXTremolo *pTREM, int depth_percent)
     float clip_h = 1.0; //This is always at 1.0    // TODO: necessary?
     float clip_l = 1.0 - depth; //bottom value (tip of the trough, when wave is a sine)
     
-//    float amp = (float) pTREM->depth_percent * 0.01 * 0.5 * pTREM->amplification; //Peak-to peak amplude * 1/2
-//    float offset = 1.0 - amp; // so that the LFO signal peak is always at 1
-//    float clip_h = 1.0; //This is always at 1.0    // TODO: necessary?
-//    float clip_l = offset - amp; //bottom value (tip of the trough, when wave is a sine)
-    
     SetOffset(pTREM->p_LFO, offset);
     SetAmplitude(pTREM->p_LFO, amp);    
     SetClipHigh(pTREM->p_LFO, clip_h); // TODO: necessary?
@@ -46,8 +41,8 @@ bool SetDepth(t_DAFXTremolo *pTREM, int depth_percent)
 
 bool SetSharpness(t_DAFXTremolo *pTREM, float sharpness)
 {
-    // sharpness value of (0-1) maps to LFO amplification value of (1-10)
-    pTREM->amplification = 9.0 * (float)sharpness + 1.0;
+    // sharpness value of (0-1) maps to LFO amplification value of (1-5)
+    pTREM->amplification = 4.0 * (float)sharpness + 1.0;
     
     float amp = (float) pTREM->depth_percent * 0.01 * 0.5 * pTREM->amplification; //Peak-to peak amplude * 1/2
     SetAmplitude(pTREM->p_LFO, amp);

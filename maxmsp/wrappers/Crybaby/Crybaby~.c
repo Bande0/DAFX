@@ -100,8 +100,29 @@ void Crybaby_assist(t_Crybaby *x, void *b, long m, long a, char *s)
             case CB_INLET_WAH_BALANCE:
                 sprintf(s, "(float) Wah balance");
                 break;
+            case CB_INLET_LFO_MODE:
+                sprintf(s, "(float) Auto-wah mode (0: Sin, 1: sawtooth)");
+                break;
+            case CB_INLET_LFO_RATE_BPM:
+                sprintf(s, "(float) Auto-wah control rate (bpm)");
+                break;
+            case CB_INLET_LFO_AMP:
+                sprintf(s, "(float) Auto-wah control amplitude");
+                break;
+            case CB_INLET_LFO_BALANCE:
+                sprintf(s, "(float) Auto-wah control rise/fall balance (sawtooth only)");
+                break;
+            case CB_INLET_LFO_OFFSET:
+                sprintf(s, "(float) Auto-wah control offset");
+                break;
+            case CB_INLET_LFO_CLIP_H:
+                sprintf(s, "(float) Auto-wah control upper clipping limit (clip h)");
+                break;
+            case CB_INLET_LFO_CLIP_L:
+                sprintf(s, "(float) Auto-wah control upper clipping limit (clip h)");
+                break;
             case CB_INLET_BYPASS_CB:
-                sprintf(s, "(int) Bypass / Enable Crybaby");
+                sprintf(s, "(int) Bypass / Manual / Auto");
                 break;
             
             default:
@@ -119,6 +140,9 @@ void Crybaby_assist(t_Crybaby *x, void *b, long m, long a, char *s)
                 break;
             case CB_OUTLET_FILTER_COEFFS:
                 sprintf(s, "(signal) biquad filter coefficients");
+                break;
+            case CB_OUTLET_LFO_SIGNAL:
+                sprintf(s, "(signal) Auto-wah control signal (LFO)");
                 break;
             default:
                 sprintf(s, "Invalid outlet!");
@@ -150,15 +174,20 @@ void Crybaby_float(t_Crybaby *x, double f)
         //Set the CB_perform to Bypass / process
         case CB_INLET_BYPASS_CB:
             {
-                if ((bool)f)
-                {
-                    x->pf_CB_perform = &DAFXBypassCrybaby;
+                switch((t_cb_algo_select)f) {
+                    case CB_BYPASS_CRYBABY:
+                        x->pf_CB_perform = &DAFXBypassCrybaby;
+                        break;
+                    case CB_MANUAL_CRYBABY:
+                        x->pf_CB_perform = &DAFXProcessCrybaby;
+                        break;
+                    case CB_AUTO_CRYBABY:
+                        x->pf_CB_perform = &DAFXProcessAutoCrybaby;
+                        break;
+                    default:
+                        break;
                 }
-                else
-                {
-                    x->pf_CB_perform = &DAFXProcessCrybaby;
-                }
-            }
+            }            
             break;
             
         default:
@@ -204,6 +233,7 @@ void Crybaby_perform64(t_Crybaby *x,
     
     t_double *OutSignal = outs[CB_OUTLET_OUTPUT_SIGNAL];	// we get audio for each outlet of the object from the **outs argument
     t_double *OutFilterCoeffs = outs[CB_OUTLET_FILTER_COEFFS];	// we get audio for each outlet of the object from the **outs argument
+    t_double *OutLFO = outs[CB_OUTLET_LFO_SIGNAL];	// we get audio for each outlet of the object from the **outs argument
     
     //Converting the incoming signal from double to float complex in a temporary array
     for (int i = 0; i < sampleframes; i++) {
@@ -217,6 +247,7 @@ void Crybaby_perform64(t_Crybaby *x,
     for(int i = 0; i < sampleframes; i++){
         //Converting results from float back to double, which Max expects
         OutSignal[i] = (double) pCB->p_output_block[i];
+        OutLFO[i] = (double) pCB->pLFO->p_output_block[i];
     }
     
     for(int i = 0; i < (BIQUAD_DENOMINATOR_SIZE + BIQUAD_NUMERATOR_SIZE); i++){

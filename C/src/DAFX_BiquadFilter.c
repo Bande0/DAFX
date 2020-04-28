@@ -68,16 +68,12 @@ bool ProcessBiquad(t_DAFX_BiquadFilter *pBQF)
         
         // get input sample
         x = p_in[i];
-        
         //@matlab: y(n)= b0*x(n) + w1(n-1);
         y = b[0] * x + w[0];
-        
         //@matlab: w1(n)=b1*x(n) + a1*y(n) + w2(n)
         w[0] = b[1] * x - a[1] * y + w[1];
-        
         //@matlab: w2(n)= b2*x(n) - a2*y(n)
         w[1]= b[2] * x - a[2] * y;
-        
         //copy result to output buff
         p_out[i] = y;
     }
@@ -85,6 +81,22 @@ bool ProcessBiquad(t_DAFX_BiquadFilter *pBQF)
     return true;
 }
 
+float ProcessSingleSampleBiquad(t_DAFX_BiquadFilter *pBQF, float x)
+{
+    float * b = pBQF->b;
+    float * a = pBQF->a;
+    float * w = pBQF->pInternalMemory;
+    
+    float y;
+    //@matlab: y(n)= b0*x(n) + w1(n-1);
+    y = b[0] * x + w[0];
+    //@matlab: w1(n)=b1*x(n) + a1*y(n) + w2(n)
+    w[0] = b[1] * x - a[1] * y + w[1];
+    //@matlab: w2(n)= b2*x(n) - a2*y(n)
+    w[1]= b[2] * x - a[2] * y;
+    
+    return y;
+}
 
 void DeallocBiquadFilter(t_DAFX_BiquadFilter *pBQF)
 {
