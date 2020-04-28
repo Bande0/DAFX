@@ -112,8 +112,17 @@ extern "C" {
      * @param pointer on Crybaby structure
      * @return void
      */
-    void DeallocDAFXCrybaby(t_DAFXCrybaby *pCB);    
+    void DeallocDAFXCrybaby(t_DAFXCrybaby *pCB);
     
+    //Setters
+    bool Crybaby_SetLFOMode(t_DAFXCrybaby *pCB, t_lfo_algo_select mode);
+    bool Crybaby_SetLFORate(t_DAFXCrybaby *pCB, int rate_bpm);
+    bool Crybaby_SetLFOAmplitude(t_DAFXCrybaby *pCB, float amp);
+    bool Crybaby_SetLFOBalance(t_DAFXCrybaby *pCB, float bal);
+    bool Crybaby_SetLFOOffset(t_DAFXCrybaby *pCB, float offset);
+    bool Crybaby_SetLFOClipHigh(t_DAFXCrybaby *pCB, float clip_h);
+    bool Crybaby_SetLFOClipLow(t_DAFXCrybaby *pCB, float clip_l);
+    bool Crybaby_ReinitLFOPhase(t_DAFXCrybaby *pCB);
     
 #ifdef __cplusplus
 }

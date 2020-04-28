@@ -52,7 +52,7 @@ bool SetBiquadFilterCoeffs(t_DAFX_BiquadFilter *pBQF, float *p_coeffs)
 }
 
 
-bool ProcessBiquad(t_DAFX_BiquadFilter *pBQF)
+bool ProcessBlockBiquad(t_DAFX_BiquadFilter *pBQF)
 {
     float * p_in = pBQF->pInBuff;
     float * p_out = pBQF->pOutBuff;
@@ -63,19 +63,8 @@ bool ProcessBiquad(t_DAFX_BiquadFilter *pBQF)
     int buffer_len = pBQF->buffer_len;
     
     for (int i=0; i < buffer_len; i++)// loop through all samples in inBuff
-    {
-        float y, x;
-        
-        // get input sample
-        x = p_in[i];
-        //@matlab: y(n)= b0*x(n) + w1(n-1);
-        y = b[0] * x + w[0];
-        //@matlab: w1(n)=b1*x(n) + a1*y(n) + w2(n)
-        w[0] = b[1] * x - a[1] * y + w[1];
-        //@matlab: w2(n)= b2*x(n) - a2*y(n)
-        w[1]= b[2] * x - a[2] * y;
-        //copy result to output buff
-        p_out[i] = y;
+    {        
+        p_out[i] = ProcessSingleSampleBiquad(pBQF, p_in[i]);
     }
     
     return true;

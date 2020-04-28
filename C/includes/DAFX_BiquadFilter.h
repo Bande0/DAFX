@@ -63,7 +63,7 @@ extern "C" {
      * @param pointer on BiquadFilter structure
      * @return process status
      */
-    bool ProcessBiquad(t_DAFX_BiquadFilter *pBQF);
+    bool ProcessBlockBiquad(t_DAFX_BiquadFilter *pBQF);
     
     /* same as above, but sample-based*/
     float ProcessSingleSampleBiquad(t_DAFX_BiquadFilter *pBQF, float x);

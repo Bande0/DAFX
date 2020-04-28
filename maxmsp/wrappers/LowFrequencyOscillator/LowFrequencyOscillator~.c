@@ -147,7 +147,7 @@ void LowFrequencyOscillator_bang(t_LowFrequencyOscillator *x)
             
         //Trigger phase reinit
         case LFO_INLET_REINIT_PHASE:
-            ReinitPhase(x->pLFO);
+            LFO_ReinitPhase(x->pLFO);
             break;
         default:
             break;
@@ -165,37 +165,37 @@ void LowFrequencyOscillator_float(t_LowFrequencyOscillator *x, double f)
     {
         //LowFrequencyOscillator algo selector
         case LFO_INLET_ALGO_SELECT:
-            SetMode(x->pLFO, (t_lfo_algo_select) f);
+            LFO_SetMode(x->pLFO, (t_lfo_algo_select) f);
             break;
             
         //Frequency
         case LFO_INLET_F:
-            SetFrequency(x->pLFO, f);
+            LFO_SetFrequency(x->pLFO, f);
             break;
         
         //Amplitude
         case LFO_INLET_AMP:
-            SetAmplitude(x->pLFO, f);
+            LFO_SetAmplitude(x->pLFO, f);
             break;
             
         //Balance
         case LFO_INLET_BALANCE:
-            SetBalance(x->pLFO, f);
+            LFO_SetBalance(x->pLFO, f);
             break;
             
         //Offset
         case LFO_INLET_OFFSET:
-            SetOffset(x->pLFO, f);
+            LFO_SetOffset(x->pLFO, f);
             break;
             
         //Clip H
         case LFO_INLET_CLIP_H:
-            SetClipHigh(x->pLFO, f);
+            LFO_SetClipHigh(x->pLFO, f);
             break;
             
         //Clip L
         case LFO_INLET_CLIP_L:
-            SetClipLow(x->pLFO, f);
+            LFO_SetClipLow(x->pLFO, f);
             break;
             
         //Set the LFO_perform to Bypass / process

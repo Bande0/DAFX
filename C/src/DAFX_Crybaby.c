@@ -11,6 +11,55 @@
 #include "DAFX_definitions.h"
 #include <Accelerate/Accelerate.h>
 
+bool Crybaby_ReinitLFOPhase(t_DAFXCrybaby *pCB)
+{
+    LFO_ReinitPhase(pCB->pLFO);
+    return true;
+}
+
+bool Crybaby_SetLFOMode(t_DAFXCrybaby *pCB, t_lfo_algo_select mode)
+{
+    LFO_SetMode(pCB->pLFO, mode);
+    return true;
+}
+
+bool Crybaby_SetLFORate(t_DAFXCrybaby *pCB, int rate_bpm)
+{
+    float f = DAFX_MAX((float) rate_bpm, 0.0) * 0.01666667; // *(1/60)
+    LFO_SetFrequency(pCB->pLFO, f);
+    return true;
+}
+
+bool Crybaby_SetLFOAmplitude(t_DAFXCrybaby *pCB, float amp)
+{
+    LFO_SetAmplitude(pCB->pLFO, amp);
+    return true;
+}
+
+bool Crybaby_SetLFOBalance(t_DAFXCrybaby *pCB, float bal)
+{
+    LFO_SetBalance(pCB->pLFO, DAFX_MAX(DAFX_MIN(bal, CB_MAX_LFO_BALANCE), CB_MIN_LFO_BALANCE));
+    return true;
+}
+
+bool Crybaby_SetLFOOffset(t_DAFXCrybaby *pCB, float offset)
+{
+    LFO_SetOffset(pCB->pLFO, offset);
+    return true;
+}
+
+bool Crybaby_SetLFOClipHigh(t_DAFXCrybaby *pCB, float clip_h)
+{
+    LFO_SetClipHigh(pCB->pLFO, clip_h);
+    return true;
+}
+
+bool Crybaby_SetLFOClipLow(t_DAFXCrybaby *pCB, float clip_l)
+{
+    LFO_SetClipLow(pCB->pLFO, clip_l);
+    return true;
+}
+
 bool InitDAFXCrybaby(t_DAFXCrybaby *pCB)
 {
     //Signal vector size
@@ -28,13 +77,13 @@ bool InitDAFXCrybaby(t_DAFXCrybaby *pCB)
     pCB->pLFO->fs = pCB->fs;
     pCB->pLFO->block_size = block_size;
     InitDAFXLowFrequencyOscillator(pCB->pLFO);
-    SetMode(pCB->pLFO, CB_INIT_LFO_MODE);
-    SetFrequency(pCB->pLFO, CB_INIT_LFO_FREQ_HZ);
-    SetAmplitude(pCB->pLFO, CB_INIT_LFO_AMP);
-    SetOffset(pCB->pLFO, CB_INIT_LFO_OFFSET);
-    SetClipHigh(pCB->pLFO, CB_INIT_LFO_CLIP_H);
-    SetClipLow(pCB->pLFO, CB_INIT_LFO_CLIP_L);
-    SetBalance(pCB->pLFO, CB_INIT_LFO_BALANCE);
+    LFO_SetMode(pCB->pLFO, CB_INIT_LFO_MODE);
+    LFO_SetFrequency(pCB->pLFO, CB_INIT_LFO_FREQ_HZ);
+    LFO_SetAmplitude(pCB->pLFO, CB_INIT_LFO_AMP);
+    LFO_SetOffset(pCB->pLFO, CB_INIT_LFO_OFFSET);
+    LFO_SetClipHigh(pCB->pLFO, CB_INIT_LFO_CLIP_H);
+    LFO_SetClipLow(pCB->pLFO, CB_INIT_LFO_CLIP_L);
+    LFO_SetBalance(pCB->pLFO, CB_INIT_LFO_BALANCE);
    
     //Useful params
     float w0 = 2.0 * ONE_PI * CB_INIT_F0 / (float)fs;
@@ -146,7 +195,7 @@ bool DAFXProcessCrybaby(t_DAFXCrybaby *pCB)
         p_bq_inbuf[i] = p_input_block[i];
     }
     
-    ProcessBiquad(pCB->p_biquad);
+    ProcessBlockBiquad(pCB->p_biquad);
     
     //summing the wah-ed and clean signals
     for (int i = 0; i < pCB->block_size; i++) {

@@ -37,6 +37,7 @@ extern "C" {
         int depth_percent;
         float sharpness;
         float amplification;
+        float post_gain;
         
         //function pointer to sample generation function
         void * pf_process_func;
@@ -83,6 +84,7 @@ extern "C" {
     bool SetRate(t_DAFXTremolo *pTREM, int rate_bpm);
     bool SetDepth(t_DAFXTremolo *pTREM, int depth_percent);
     bool SetSharpness(t_DAFXTremolo *pTREM, float sharpness);
+    bool SetPostGain(t_DAFXTremolo *pTREM, float gain);
     
 #ifdef __cplusplus
 }

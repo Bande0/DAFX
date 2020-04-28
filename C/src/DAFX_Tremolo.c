@@ -13,7 +13,7 @@
 bool SetRate(t_DAFXTremolo *pTREM, int rate_bpm)
 {
     float f = DAFX_MAX((float)rate_bpm, 0.0) * 0.01666667; // *(1/60)
-    SetFrequency(pTREM->p_LFO, f);
+    LFO_SetFrequency(pTREM->p_LFO, f);
     
     pTREM->rate_bpm = rate_bpm;
     
@@ -31,10 +31,10 @@ bool SetDepth(t_DAFXTremolo *pTREM, int depth_percent)
     float clip_h = 1.0; //This is always at 1.0    // TODO: necessary?
     float clip_l = 1.0 - depth; //bottom value (tip of the trough, when wave is a sine)
     
-    SetOffset(pTREM->p_LFO, offset);
-    SetAmplitude(pTREM->p_LFO, amp);    
-    SetClipHigh(pTREM->p_LFO, clip_h); // TODO: necessary?
-    SetClipLow(pTREM->p_LFO, clip_l);
+    LFO_SetOffset(pTREM->p_LFO, offset);
+    LFO_SetAmplitude(pTREM->p_LFO, amp);
+    LFO_SetClipHigh(pTREM->p_LFO, clip_h); // TODO: necessary?
+    LFO_SetClipLow(pTREM->p_LFO, clip_l);
     
     return true;
 }
@@ -45,10 +45,16 @@ bool SetSharpness(t_DAFXTremolo *pTREM, float sharpness)
     pTREM->amplification = 4.0 * (float)sharpness + 1.0;
     
     float amp = (float) pTREM->depth_percent * 0.01 * 0.5 * pTREM->amplification; //Peak-to peak amplude * 1/2
-    SetAmplitude(pTREM->p_LFO, amp);
+    LFO_SetAmplitude(pTREM->p_LFO, amp);
     
     pTREM->sharpness = sharpness;
     
+    return true;
+}
+
+bool SetPostGain(t_DAFXTremolo *pTREM, float gain)
+{
+    pTREM->post_gain = gain;
     return true;
 }
 
@@ -64,12 +70,13 @@ bool InitDAFXTremolo(t_DAFXTremolo *pTREM)
     pTREM->p_LFO->fs = pTREM->fs;
     pTREM->p_LFO->block_size = block_size;
     InitDAFXLowFrequencyOscillator(pTREM->p_LFO);
-    SetMode(pTREM->p_LFO, LFO_ALGO_SELECT_SIN);
+    LFO_SetMode(pTREM->p_LFO, LFO_ALGO_SELECT_SIN);
     
     // -- Tremolo params -- //
     SetRate(pTREM, TREM_INIT_DEFAULT_RATE_BMP);
     SetSharpness(pTREM, TREM_INIT_DEFAULT_SHARPNESS);
     SetDepth(pTREM, TREM_INIT_DEFAULT_DEPTH_PERCENT);
+    SetPostGain(pTREM, TREM_INIT_DEFAULT_POSTGAIN);
     
     return true;
 }
@@ -80,12 +87,13 @@ bool DAFXTremolo(t_DAFXTremolo *pTREM)
     float *pInput = pTREM->p_input_block;
     float *pOutput = pTREM->p_output_block;
     float *p_lfo_buff = pTREM->p_LFO->p_output_block;
+    float gain = pTREM->post_gain;
 
     //First, generate the LFO signal with a single call to its sample generator function
     DAFXLowFrequencyOscillator(pTREM->p_LFO);
     
     for (int i = 0; i < block_size; i++) {
-        pOutput[i] = pInput[i] * p_lfo_buff[i];
+        pOutput[i] = pInput[i] * p_lfo_buff[i] * gain;
     }
     
     return true;

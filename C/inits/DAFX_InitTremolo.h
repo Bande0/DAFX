@@ -16,6 +16,7 @@ extern "C" {
 #define TREM_INIT_DEFAULT_RATE_BMP              300
 #define TREM_INIT_DEFAULT_DEPTH_PERCENT         50
 #define TREM_INIT_DEFAULT_SHARPNESS             0.0
+#define TREM_INIT_DEFAULT_POSTGAIN              1.0
 
     
 #ifdef __cplusplus

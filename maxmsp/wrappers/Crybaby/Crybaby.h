@@ -31,6 +31,7 @@ enum
     CB_INLET_LFO_OFFSET,
     CB_INLET_LFO_CLIP_H,
     CB_INLET_LFO_CLIP_L,
+    CB_INLET_REINIT_LFO_PHASE,
     CB_INLET_BYPASS_CB,
     Crybaby_N_INLETS,
 };
@@ -72,6 +73,9 @@ enum
     
     //runs if input is an int
     void Crybaby_int(t_Crybaby *x, long n);
+    
+    //runs if input is a bang
+    void Crybaby_bang(t_Crybaby *x);
     
     // Runs if mouse is hovered over an in/outlet
     void Crybaby_assist(t_Crybaby *x, void *b, long m, long a, char *s);    

@@ -43,6 +43,9 @@ extern "C" {
 #define CB_INIT_LFO_CLIP_H      1.4
 #define CB_INIT_LFO_CLIP_L      -0.5
 #define CB_INIT_LFO_BALANCE     0.8
+
+#define CB_MAX_LFO_BALANCE    0.95f
+#define CB_MIN_LFO_BALANCE    0.05f
     
 // Pedal position limits
 #define CB_PEDAL_MAX    0.99f

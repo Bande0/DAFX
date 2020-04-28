@@ -8,7 +8,7 @@
 #include "DAFX_definitions.h"
 #include <Accelerate/Accelerate.h>
 
-bool SetMode(t_DAFXLowFrequencyOscillator *pLFO, t_lfo_algo_select alg)
+bool LFO_SetMode(t_DAFXLowFrequencyOscillator *pLFO, t_lfo_algo_select alg)
 {
     switch(alg) {
         case LFO_ALGO_SELECT_SIN:
@@ -26,7 +26,7 @@ bool SetMode(t_DAFXLowFrequencyOscillator *pLFO, t_lfo_algo_select alg)
     return true;
 }
 
-bool SetFrequency(t_DAFXLowFrequencyOscillator *pLFO, float f)
+bool LFO_SetFrequency(t_DAFXLowFrequencyOscillator *pLFO, float f)
 {
     pLFO->f = DAFX_MAX(f, 0.0);
     _RecalculatePrivateVariables(pLFO);
@@ -34,7 +34,7 @@ bool SetFrequency(t_DAFXLowFrequencyOscillator *pLFO, float f)
     return true;
 }
 
-bool SetAmplitude(t_DAFXLowFrequencyOscillator *pLFO, float a)
+bool LFO_SetAmplitude(t_DAFXLowFrequencyOscillator *pLFO, float a)
 {
     pLFO->amp = DAFX_MAX(a, 0.0);
     _RecalculatePrivateVariables(pLFO);
@@ -42,7 +42,7 @@ bool SetAmplitude(t_DAFXLowFrequencyOscillator *pLFO, float a)
     return true;
 }
 
-bool SetBalance(t_DAFXLowFrequencyOscillator *pLFO, float bal)
+bool LFO_SetBalance(t_DAFXLowFrequencyOscillator *pLFO, float bal)
 {
     pLFO->balance = DAFX_MAX(DAFX_MIN(bal, LFO_MAX_BALANCE), LFO_MIN_BALANCE);
     _RecalculatePrivateVariables(pLFO);
@@ -50,26 +50,26 @@ bool SetBalance(t_DAFXLowFrequencyOscillator *pLFO, float bal)
     return true;
 }
 
-bool SetOffset(t_DAFXLowFrequencyOscillator *pLFO, float off)
+bool LFO_SetOffset(t_DAFXLowFrequencyOscillator *pLFO, float off)
 {
     pLFO->offset = off;
     return true;
 }
 
-bool SetClipHigh(t_DAFXLowFrequencyOscillator *pLFO, float clip_h)
+bool LFO_SetClipHigh(t_DAFXLowFrequencyOscillator *pLFO, float clip_h)
 {
     pLFO->clip_h = clip_h;
     return true;
 }
 
-bool SetClipLow(t_DAFXLowFrequencyOscillator *pLFO, float clip_l)
+bool LFO_SetClipLow(t_DAFXLowFrequencyOscillator *pLFO, float clip_l)
 {
     pLFO->clip_l = clip_l;
     return true;
 }
 
 
-bool ReinitPhase(t_DAFXLowFrequencyOscillator *pLFO)
+bool LFO_ReinitPhase(t_DAFXLowFrequencyOscillator *pLFO)
 {
     if(pLFO->algo == LFO_ALGO_SELECT_SIN)
     {

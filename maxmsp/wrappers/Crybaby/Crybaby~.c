@@ -35,6 +35,7 @@ void ext_main(void *r)
     class_addmethod(c, (method)Crybaby_assist,	"assist",	A_CANT, 0); //action if mouse is hovered over an in/outlet
     class_addmethod(c, (method)Crybaby_int,	"int",      A_LONG, 0); //action if input is an int
     class_addmethod(c, (method)Crybaby_float,	"float",	A_FLOAT,0); //action if input is a float
+    class_addmethod(c, (method)Crybaby_bang, "bang", 0);
     
     class_dspinit(c); //this is always needed for MSP objects
     class_register(CLASS_BOX, c);
@@ -121,6 +122,9 @@ void Crybaby_assist(t_Crybaby *x, void *b, long m, long a, char *s)
             case CB_INLET_LFO_CLIP_L:
                 sprintf(s, "(float) Auto-wah control upper clipping limit (clip h)");
                 break;
+            case CB_INLET_REINIT_LFO_PHASE:
+                sprintf(s, "(bang) Trigger reinit of LFO phasebb");
+                break;
             case CB_INLET_BYPASS_CB:
                 sprintf(s, "(int) Bypass / Manual / Auto");
                 break;
@@ -171,6 +175,41 @@ void Crybaby_float(t_Crybaby *x, double f)
             x->pCB->wah_balance =  DAFX_MAX(DAFX_MIN(f, 1.0), 0.0);
             break;
             
+        //LFO Mode
+        case CB_INLET_LFO_MODE:
+            Crybaby_SetLFOMode(x->pCB, (t_lfo_algo_select) f);
+            break;
+            
+        //LFO Rate
+        case CB_INLET_LFO_RATE_BPM:
+            Crybaby_SetLFORate(x->pCB, (int)f);
+            break;
+            
+        //LFO Amp
+        case CB_INLET_LFO_AMP:
+            Crybaby_SetLFOAmplitude(x->pCB, f);
+            break;
+            
+        //LFO Balance
+        case CB_INLET_LFO_BALANCE:
+            Crybaby_SetLFOBalance(x->pCB, f);
+            break;
+            
+        //LFO Offset
+        case CB_INLET_LFO_OFFSET:
+            Crybaby_SetLFOOffset(x->pCB, f);
+            break;
+            
+        //LFO Clip H
+        case CB_INLET_LFO_CLIP_H:
+            Crybaby_SetLFOClipHigh(x->pCB, f);
+            break;
+            
+        //LFO Clip L
+        case CB_INLET_LFO_CLIP_L:
+            Crybaby_SetLFOClipLow(x->pCB, f);
+            break;
+            
         //Set the CB_perform to Bypass / process
         case CB_INLET_BYPASS_CB:
             {
@@ -199,6 +238,19 @@ void Crybaby_float(t_Crybaby *x, double f)
 void Crybaby_int(t_Crybaby *x, long n)
 {
     Crybaby_float(x, (double)n);
+}
+
+//Action if input was a bang
+void Crybaby_bang(t_Crybaby *x)
+{
+    switch (proxy_getinlet((t_object *)x)) {
+        //Reinit LFO Phase
+        case CB_INLET_REINIT_LFO_PHASE:
+            Crybaby_ReinitLFOPhase(x->pCB);
+            break;
+        default:
+            break;
+    }
 }
 
 

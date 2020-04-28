@@ -100,6 +100,9 @@ void Tremolo_assist(t_Tremolo *x, void *b, long m, long a, char *s)
             case TREM_INLET_SHARPNESS:
                 sprintf(s, "(float) 'sharpness' (smooth transition between 0:sinewave, 1:squarewave)");
                 break;
+            case TREM_INLET_POSTGAIN:
+                sprintf(s, "(float) post-gain");
+                break;
             case TREM_INLET_BYPASS_TREM:
                 sprintf(s, "(int) Bypass / Enable Tremolo");
                 break;
@@ -120,6 +123,7 @@ void Tremolo_assist(t_Tremolo *x, void *b, long m, long a, char *s)
                 break;
             case TREM_OUTLET_LFO_OFFSET:
                 sprintf(s, "(signal) LFO offset");
+                break;
             default:
                 sprintf(s, "Invalid outlet!");
                 break;
@@ -150,6 +154,11 @@ void Tremolo_float(t_Tremolo *x, double f)
         //Sharpness
         case TREM_INLET_SHARPNESS:
             SetSharpness(x->pTREM, f);
+            break;
+            
+        //Sharpness
+        case TREM_INLET_POSTGAIN:
+            SetPostGain(x->pTREM, f);
             break;
             
         //Set the TREM_perform to Bypass / process
