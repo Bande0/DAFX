@@ -67,7 +67,7 @@ extern "C" {
         float d_fall;
         t_lfo_state d_state;
         
-        //function pointer to sample generation function
+        //function pointer to LFO sample generation function (sine or sawtooth)
         void *pf_process_func;
         
     }t_DAFXLowFrequencyOscillator;

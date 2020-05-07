@@ -1,11 +1,10 @@
 //
-//  DAFX_InitOverdrive.h
-//  Overdrive~
+//  DAFX_InitLowFrequencyOscillator.h
 //
 
 
-#ifndef DAFX_InitOverdrive_h
-#define DAFX_InitOverdrive_h
+#ifndef DAFX_InitLowFrequencyOscillator_h
+#define DAFX_InitLowFrequencyOscillator_h
 
 #ifdef __cplusplus
 extern "C" {
@@ -27,4 +26,4 @@ extern "C" {
 }
 #endif
 
-#endif /* InitAdspOverdrive_h */
+#endif /* InitAdspLowFrequencyOscillator_h */

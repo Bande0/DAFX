@@ -39,7 +39,7 @@ extern "C" {
         float amplification;
         float post_gain;
         
-        //function pointer to sample generation function
+        //function pointer to LFO sample generation function (sine or sawtooth)
         void * pf_process_func;
         
     }t_DAFXTremolo;
