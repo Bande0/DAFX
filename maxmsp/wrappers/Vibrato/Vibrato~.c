@@ -98,9 +98,6 @@ void Vibrato_assist(t_Vibrato *x, void *b, long m, long a, char *s)
             case VIB_INLET_DEPTH:
                 sprintf(s, "(int) Vibrato depth");
                 break;
-            case VIB_INLET_DELAY_MS_DIRECT_CONTROL:
-                sprintf(s, "(float) Delay ms direct control (debug)");
-                break;
             case VIB_INLET_DELAYLINE_BUFFER_SIZE:
                 sprintf(s, "(float) Delayline buffersize set (millisec) (debug)");
                 break;
@@ -120,19 +117,7 @@ void Vibrato_assist(t_Vibrato *x, void *b, long m, long a, char *s)
                 sprintf(s, "(signal) Output signal");
                 break;
             case VIB_OUTLET_DELAY_MS:
-                sprintf(s, "(signal) Delay control parameter");
-                break;
-            case VIB_OUTLET_DEBUG_LFO_AMP:
-                sprintf(s, "(signal) LFO amplitude (debug)");
-                break;
-            case VIB_OUTLET_DEBUG_LFO_OFFSET:
-                sprintf(s, "(signal) LFO offset (debug)");
-                break;
-            case VIB_OUTLET_DEBUG_LFO_SIGNAL:
-                sprintf(s, "(signal) LFO signal (debug)");
-                break;
-            case VIB_OUTLET_DEBUG_BUFSIZE:
-                sprintf(s, "(signal) delay line buffer size (debug)");
+                sprintf(s, "(signal) LFO Delay control");
                 break;
             default:
                 sprintf(s, "Invalid outlet!");
@@ -159,11 +144,6 @@ void Vibrato_float(t_Vibrato *x, double f)
         //Depth
         case VIB_INLET_DEPTH:
             VIB_SetDepth(x->pVIB, f);
-            break;
-            
-        //Delay direct control
-        case VIB_INLET_DELAY_MS_DIRECT_CONTROL:
-            DEL_SetDelayMs(x->pVIB->pDEL, f);
             break;
             
         //Delay direct control
@@ -228,10 +208,6 @@ void Vibrato_perform64(t_Vibrato *x,
     
     t_double *OutSignal = outs[VIB_OUTLET_OUTPUT_SIGNAL];	// we get audio for each outlet of the object from the **outs argument
     t_double *DelayMSControl = outs[VIB_OUTLET_DELAY_MS];	// we get audio for each outlet of the object from the **outs argument
-    t_double *LFOAmp = outs[VIB_OUTLET_DEBUG_LFO_AMP];	// we get audio for each outlet of the object from the **outs argument
-    t_double *LFOOffset = outs[VIB_OUTLET_DEBUG_LFO_OFFSET];	// we get audio for each outlet of the object from the **outs argument
-    t_double *LFOSignal = outs[VIB_OUTLET_DEBUG_LFO_SIGNAL];	// we get audio for each outlet of the object from the **outs argument
-    t_double *DELBufsize = outs[VIB_OUTLET_DEBUG_BUFSIZE];	// we get audio for each outlet of the object from the **outs argument
     
     //Converting the incoming signal from double to float complex in a temporary array
     for (int i = 0; i < sampleframes; i++) {
@@ -245,13 +221,7 @@ void Vibrato_perform64(t_Vibrato *x,
     for(int i = 0; i < sampleframes; i++){
         //Converting results from float back to double, which Max expects
         OutSignal[i] = (double) pVIB->p_output_buffer[i];
-        
-        DelayMSControl[i] = (double) pVIB->pDEL->delay_samples;
-        LFOAmp[i] = (double) pVIB->pLFO->amp;
-        LFOOffset[i] = (double) pVIB->pLFO->offset;
-        LFOSignal[i] = (double) pVIB->pLFO->p_output_block[i];
-        DELBufsize[i] = (double) pVIB->pDEL->buf_size;
-          
+        DelayMSControl[i] = (double) pVIB->pDEL->delay_ms;
     }
     
 }

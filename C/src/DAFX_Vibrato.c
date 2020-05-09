@@ -14,6 +14,8 @@ bool VIB_SetRate(t_DAFXVibrato *pVIB, int rate_bpm)
 {
     float f = DAFX_MAX((float)rate_bpm, 0.0) * 0.01666667; // *(1/60)
     LFO_SetFrequency(pVIB->pLFO, f);
+    
+    //Need to reset the depth accordingly, because d(sin(Ax))/dx == A * cos(Ax)
     VIB_SetDepth(pVIB, pVIB->depth);
     
     pVIB->rate_bpm = rate_bpm;

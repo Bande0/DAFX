@@ -15,9 +15,9 @@
 #include <Accelerate/Accelerate.h>
 
 
-#define INIT_DELAYLINE_DELAY_MS          20.0
-#define INIT_DELAYLINE_MAX_DELAY_MS      100.0
-#define MIN_DELAYLINE_SIZE_MS            20.0
+#define INIT_DELAYLINE_DELAY_MS          5.0
+#define INIT_DELAYLINE_MAX_DELAY_MS      10.0
+#define MIN_DELAYLINE_SIZE_MS            1.0
 
 
 #ifdef __cplusplus
