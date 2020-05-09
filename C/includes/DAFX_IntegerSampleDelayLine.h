@@ -15,8 +15,9 @@
 #include <Accelerate/Accelerate.h>
 
 
-#define INIT_DELAYLINE_DELAY_MS          20
-#define INIT_DELAYLINE_MAX_DELAY_MS      50
+#define INIT_DELAYLINE_DELAY_MS          20.0
+#define INIT_DELAYLINE_MAX_DELAY_MS      100.0
+#define MIN_DELAYLINE_SIZE_MS            20.0
 
 
 #ifdef __cplusplus
@@ -28,6 +29,9 @@ extern "C" {
         int buf_size;
         int fs;
         float *p_delay_buffer;
+        
+        float max_delay_ms;
+        float delay_ms;
         
         int delay_samples; 
         int rp;
@@ -74,8 +78,8 @@ extern "C" {
     void DeallocDAFXIntegerSampleDelayLine(t_DAFXIntegerSampleDelayLine *pDEL);
     
     //Setters
-    bool SetDelayMs(t_DAFXIntegerSampleDelayLine *pDEL, float delay_ms);
-    bool SetMaxDelayMs(t_DAFXIntegerSampleDelayLine *pDEL, float max_delay_ms);
+    bool DEL_SetDelayMs(t_DAFXIntegerSampleDelayLine *pDEL, float delay_ms);
+    bool DEL_SetMaxDelayMs(t_DAFXIntegerSampleDelayLine *pDEL, float max_delay_ms);
     
 #ifdef __cplusplus
 }

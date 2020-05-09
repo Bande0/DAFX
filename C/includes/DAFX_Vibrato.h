@@ -29,6 +29,7 @@ extern "C" {
         float *p_output_buffer;
         
         t_DAFXIntegerSampleDelayLine *pDEL;
+        t_DAFXLowFrequencyOscillator *pLFO;
         
         // Vibrato params
         int rate_bpm;
@@ -70,8 +71,8 @@ extern "C" {
     void DeallocDAFXVibrato(t_DAFXVibrato *pVIB);
     
     //Setters
-    bool SetRate(t_DAFXVibrato *pVIB, int rate_bpm);
-    bool SetDepth(t_DAFXVibrato *pVIB, float depth);
+    bool VIB_SetRate(t_DAFXVibrato *pVIB, int rate_bpm);
+    bool VIB_SetDepth(t_DAFXVibrato *pVIB, float depth);
     
 #ifdef __cplusplus
 }
