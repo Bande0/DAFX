@@ -21,10 +21,12 @@ extern "C" {
     
 
 // Math constant
-#define     TWO_PI      6.283185307179586f
-#define     INV_TWO_PI  0.159154943091895f
-#define     ONE_PI      3.141592653589793f
-#define     INV_ONE_PI  0.318309886183791f
+#define     TWO_PI          6.283185307179586f
+#define     INV_TWO_PI      0.159154943091895f
+#define     ONE_PI          3.141592653589793f
+#define     INV_ONE_PI      0.318309886183791f
+#define     SQRT_TWO        1.414213562373095f
+#define     INV_SQRT_TWO    0.7071067811865475
     
 #define     DEG_TO_RAD	ONE_PI / 180.0f
 #define     RAD_TO_DEG	180.0f * INV_ONE_PI

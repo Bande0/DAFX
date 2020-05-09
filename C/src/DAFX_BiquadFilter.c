@@ -56,10 +56,6 @@ bool ProcessBlockBiquad(t_DAFX_BiquadFilter *pBQF)
 {
     float * p_in = pBQF->pInBuff;
     float * p_out = pBQF->pOutBuff;
-    float * b = pBQF->b;
-    float * a = pBQF->a;
-    float * w = pBQF->pInternalMemory;
-    
     int buffer_len = pBQF->buffer_len;
     
     for (int i=0; i < buffer_len; i++)// loop through all samples in inBuff
@@ -97,8 +93,4 @@ void DeallocBiquadFilter(t_DAFX_BiquadFilter *pBQF)
            FREE(pBQF->b);
            FREE(pBQF->a);
     }
-    
 }
-
-
-
