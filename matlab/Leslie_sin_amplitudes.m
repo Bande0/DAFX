@@ -1,10 +1,17 @@
-clear all
-close all
+% clear all
+% close all
+
+fs = 48000;
+c = 343;
+lambda = c/fs;
 
 % diameter of the horn installment
 % distance between "closest to listener" and "furthest to listener"
-% independent of listener distance to speaker 
-diam = 5; 
+% independent of listener distance to speaker
+% OBS - the diameter in samples will have to come from the diameter in
+% meters and the speed of sound, I'm just fucking drunk right now and cant
+% do it
+diam_samples = 5; 
 
 % distance of listener to speaker
 % the closer we are to the speaker, the higher the AM effect due to the 
@@ -21,11 +28,11 @@ mindist = 1.1;
 % Amplitude modulation, based on distance
 A = 1/((dist+mindist)^2);
 
-w = 4 * 2*pi;   % rotational speed of the horn (in radians)
+w = 9 * 2*pi;   % rotational speed of the horn (in radians)
 t = linspace(0,1,1000); % time axis
 
-delay_L = 0.5*diam * sin(w*t) + 0.5*diam;
-delay_R = -0.5*diam * sin(w*t) + 0.5*diam;
+delay_L = 0.5*diam_samples * sin(w*t) + 0.5*diam_samples;
+delay_R = -0.5*diam_samples * sin(w*t) + 0.5*diam_samples;
 amp_L = -A*sin(w*t) + 1;
 amp_R = A*sin(w*t) + 1;
 
