@@ -6,7 +6,11 @@
 #include "DAFX_Overdrive.h"
 #include "DAFX_InitOverdrive.h"
 #include "DAFX_definitions.h"
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#else
 #include <Accelerate/Accelerate.h>
+#endif
 
 bool InitDAFXOverdrive(t_DAFXOverdrive *pOD)
 {

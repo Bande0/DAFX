@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="$(ProjectName).c" />
+    <ClCompile Include="..\..\..\C\src\DAFX_Overdrive.c">
+      <Filter>DAFX</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="DAFX">
+      <UniqueIdentifier>{9cab9d98-ea4f-454c-a8ed-22673db8ef41}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\C\includes\DAFX_definitions.h">
+      <Filter>DAFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\C\includes\DAFX_Overdrive.h">
+      <Filter>DAFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\C\inits\DAFX_InitOverdrive.h">
+      <Filter>DAFX</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
