@@ -19,5 +19,6 @@
     <ClInclude Include="..\..\..\C\includes\DAFX_LowFrequencyOscillator.h">
       <Filter>DAFX</Filter>
     </ClInclude>
+    <ClInclude Include="LowFrequencyOscillator.h" />
   </ItemGroup>
 </Project>

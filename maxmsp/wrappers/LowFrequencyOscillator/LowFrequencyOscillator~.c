@@ -29,7 +29,7 @@ void ext_main(void *r)
     // unless you need to free allocated memory, in which case you should call dsp_free from
     // your custom free function.
     
-    t_class *c = class_new("LowFrequencyOscillator~", (method)LowFrequencyOscillator_new, (method)LowFrequencyOscillator_free, (long)sizeof(t_LowFrequencyOscillator), 0L, A_GIMME, 0);
+    t_class *c = class_new("DAFXLowFrequencyOscillator~", (method)LowFrequencyOscillator_new, (method)LowFrequencyOscillator_free, (long)sizeof(t_LowFrequencyOscillator), 0L, A_GIMME, 0);
     
     //adding methods to the object for handling different actions
     class_addmethod(c, (method)LowFrequencyOscillator_dsp64,		"dsp64",	A_CANT, 0); //action if input is a signal

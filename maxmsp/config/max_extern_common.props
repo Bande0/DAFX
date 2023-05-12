@@ -10,6 +10,7 @@
 	<EXTERNALS_ROOT>$(C74_ROOT)\externals</EXTERNALS_ROOT>
 	<EXTENSIONS_ROOT>$(C74_ROOT)\extensions</EXTENSIONS_ROOT>
 	<JSEXTENSIONS_ROOT>$(C74_ROOT)\jsextensions</JSEXTENSIONS_ROOT>
+    <DAFX_ROOT>C:\git\DAFX\C\</DAFX_ROOT>
   </PropertyGroup>
   <PropertyGroup>
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
