@@ -10,10 +10,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#include "DAFX_definitions.h"
+#else
 #include <libkern/OSAtomic.h>
-
 #include <Accelerate/Accelerate.h>
-
+#endif
 
 #define INIT_DELAYLINE_DELAY_MS          5.0
 #define INIT_DELAYLINE_MAX_DELAY_MS      10.0

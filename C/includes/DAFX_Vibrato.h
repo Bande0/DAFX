@@ -10,9 +10,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <libkern/OSAtomic.h>
 
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#include "DAFX_definitions.h"
+#else
+#include <libkern/OSAtomic.h>
 #include <Accelerate/Accelerate.h>
+#endif
 
 #include "DAFX_IntegerSampleDelayLine.h"
 #include "DAFX_LowFrequencyOscillator.h"

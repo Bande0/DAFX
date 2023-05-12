@@ -7,7 +7,13 @@
 #include "DAFX_LowFrequencyOscillator.h"
 #include "DAFX_InitVibrato.h"
 #include "DAFX_definitions.h"
+
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#include <math.h>
+#else
 #include <Accelerate/Accelerate.h>
+#endif
 
 
 bool VIB_SetRate(t_DAFXVibrato *pVIB, int rate_bpm)

@@ -8,7 +8,12 @@
 #include "DAFX_BiquadFilter.h"
 #include "DAFX_InitBiquadFilter.h"
 #include "DAFX_definitions.h"
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#include <math.h>
+#else
 #include <Accelerate/Accelerate.h>
+#endif
 
 
 bool XOVER_SetCutoffFrequency(t_DAFXCrossover *pXOVER, int fc)

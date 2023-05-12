@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="$(ProjectName).c" />
+    <ClCompile Include="..\..\..\C\src\DAFX_Tremolo.c">
+      <Filter>DAFX</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\C\src\DAFX_LowFrequencyOscillator.c">
+      <Filter>DAFX</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="DAFX">
+      <UniqueIdentifier>{1a7fae7f-baab-4bf3-befa-fa53ffeb91e6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\C\includes\DAFX_definitions.h">
+      <Filter>DAFX</Filter>
+    </ClInclude>
+    <ClInclude Include="Tremolo.h" />
+    <ClInclude Include="..\..\..\C\includes\DAFX_Tremolo.h">
+      <Filter>DAFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\C\inits\DAFX_InitTremolo.h">
+      <Filter>DAFX</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

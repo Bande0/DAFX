@@ -2,12 +2,15 @@
 clear all;
 close all;
 
-infile_name = 'clean_funky_lick_90bpm';
+%infile_name = 'clean_funky_lick_90bpm';
+infile_name = 'funky_guitar';
 outfile_name = [infile_name, '_crybaby'];
 
 % read in audio file
-infile_path = ['../../input_audio/',infile_name,'.wav'];
+%%infile_path = ['../../input_audio/',infile_name,'.wav'];
+infile_path = ['../input_audio/',infile_name,'.wav'];
 [ x, fs ] = audioread(infile_path);
+fs = 48000;
 
 %time axis
 t = 0 : 1/fs : (length(x)-1)/fs; 

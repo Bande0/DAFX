@@ -10,3 +10,5 @@ maxmsp/wrappers/*/.vs/
 maxmsp/wrappers/*/x64/
 *.sln
 *.vcxproj.user
+input_audio/
+output_audio/
