@@ -7,7 +7,7 @@ Dafx TODO
 - [x] 1x vibrato + direct = flanger
 - [x] Tremolo (AM)
 
-- Something sounds wrong with the Crybaby MaxMSP object when built for Windows... it is as if the biquad coefficients are generated for 16k FS and not 48k... look into this
+- Something sounds wrong with the Crybaby MaxMSP object when built for Windows... it is as if the biquad coefficients are generated for 16k FS and not 48k... look into this. Matlab and Python model sound good.
 - Tremolo - pre-gain
 - Overdrive: Exp. method, function selector
 - Delay line (variable, fractional)
