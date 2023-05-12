@@ -8,3 +8,5 @@ DerivedData
 maxmsp/sysbuild/
 maxmsp/wrappers/*/.vs/
 maxmsp/wrappers/*/x64/
+*.sln
+*.vcxproj.user
