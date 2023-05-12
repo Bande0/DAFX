@@ -6,7 +6,12 @@
 #include "DAFX_LowFrequencyOscillator.h"
 #include "DAFX_InitLowFrequencyOscillator.h"
 #include "DAFX_definitions.h"
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#include <math.h>
+#else
 #include <Accelerate/Accelerate.h>
+#endif
 
 bool LFO_SetMode(t_DAFXLowFrequencyOscillator *pLFO, t_lfo_algo_select alg)
 {

@@ -11,9 +11,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <libkern/OSAtomic.h>
 
+#include "DAFX_definitions.h"
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#else
+#include <libkern/OSAtomic.h>
 #include <Accelerate/Accelerate.h>
+#endif
 
 
 #ifdef __cplusplus

@@ -5,3 +5,6 @@ Build
 project.xcworkspace
 xcuserdata
 DerivedData
+maxmsp/sysbuild/
+maxmsp/wrappers/*/.vs/
+maxmsp/wrappers/*/x64/

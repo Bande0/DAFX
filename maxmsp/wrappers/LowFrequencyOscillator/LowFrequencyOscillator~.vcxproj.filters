@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(C74SUPPORT)\max-includes\common\dllmain_win.c" />
+    <ClCompile Include="$(ProjectName).c" />
+    <ClCompile Include="..\..\..\C\src\DAFX_LowFrequencyOscillator.c">
+      <Filter>DAFX</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="DAFX">
+      <UniqueIdentifier>{fc171c84-b83d-4ed5-87b7-d7eb892f1e3e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\C\inits\DAFX_InitLowFrequencyOscillator.h">
+      <Filter>DAFX</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\C\includes\DAFX_LowFrequencyOscillator.h">
+      <Filter>DAFX</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
