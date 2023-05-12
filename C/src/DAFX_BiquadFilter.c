@@ -11,7 +11,10 @@
 
 #include "DAFX_definitions.h"
 
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#else
 #include <Accelerate/Accelerate.h>
+#endif
 
 
 bool InitBiquadFilter(t_DAFX_BiquadFilter *pBQF)

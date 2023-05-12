@@ -9,7 +9,11 @@
 #include "DAFX_InitBiquadFilter.h"
 #include "DAFX_LowFrequencyOscillator.h"
 #include "DAFX_definitions.h"
+
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+#else
 #include <Accelerate/Accelerate.h>
+#endif
 
 bool Crybaby_ReinitLFOPhase(t_DAFXCrybaby *pCB)
 {
